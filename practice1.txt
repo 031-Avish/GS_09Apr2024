@@ -1,0 +1,4 @@
+here after creating a practice.txt on github 
+i am creating practice1.txt locally so that a conflict will occure 
+
+in order to solve it I have to first pull the remote changes and then try to push new changes
