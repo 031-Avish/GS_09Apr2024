@@ -3,3 +3,5 @@ now the file is monitored by git , so it will tell you that there are some chang
 for other to see the changes with proper msg. 
 
 changes to learn conflict
+
+Trying to change in the remote file to create conflit 
