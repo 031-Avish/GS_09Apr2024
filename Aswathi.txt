@@ -1,2 +1,4 @@
 Hello
 This is file from branch ash
+
+Creating conflict
