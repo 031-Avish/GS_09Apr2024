@@ -1,2 +1,3 @@
 Hello
 This is file from branch ash
+I am making a change in master at day 2 
