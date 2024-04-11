@@ -1,0 +1,8 @@
+que 1 : https://app.codility.com/demo/results/trainingUVE6EJ-GYF/
+que 2 : https://app.codility.com/demo/results/trainingY48Q3H-3GK/
+que 3 : https://app.codility.com/demo/results/training2NHGCA-6M7/
+que 4 : https://app.codility.com/demo/results/trainingQJU9JT-H8Z/
+que 5 : https://app.codility.com/demo/results/trainingFB8FTR-FM8/
+que 6 : https://app.codility.com/demo/results/trainingGG3HSX-UKN/
+
+challenge : https://app.codility.com/demo/results/trainingTQSNKN-364/
