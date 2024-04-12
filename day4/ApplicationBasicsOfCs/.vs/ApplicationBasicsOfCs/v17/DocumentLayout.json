@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{71214F4C-9CE5-4F2F-9A3C-7D9ED7F47E50}|CardValidator\\CardValidator.csproj|c:\\users\\vc\\desktop\\presidio\\day1_github\\day4\\applicationbasicsofcs\\cardvalidator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71214F4C-9CE5-4F2F-9A3C-7D9ED7F47E50}|CardValidator\\CardValidator.csproj|solutionrelative:cardvalidator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{261D796E-43A2-47AB-9B19-F840BC86CF12}|Task1Doctor\\Task1Doctor.csproj|c:\\users\\vc\\desktop\\presidio\\day1_github\\day4\\applicationbasicsofcs\\task1doctor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{261D796E-43A2-47AB-9B19-F840BC86CF12}|Task1Doctor\\Task1Doctor.csproj|solutionrelative:task1doctor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{261D796E-43A2-47AB-9B19-F840BC86CF12}|Task1Doctor\\Task1Doctor.csproj|c:\\users\\vc\\desktop\\presidio\\day1_github\\day4\\applicationbasicsofcs\\task1doctor\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{261D796E-43A2-47AB-9B19-F840BC86CF12}|Task1Doctor\\Task1Doctor.csproj|solutionrelative:task1doctor\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C677B5BF-E51C-4C30-87B2-FAEE0167B35B}|BasicsOfCs\\BasicsOfCs.csproj|c:\\users\\vc\\desktop\\presidio\\day1_github\\day4\\applicationbasicsofcs\\basicsofcs\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C677B5BF-E51C-4C30-87B2-FAEE0167B35B}|BasicsOfCs\\BasicsOfCs.csproj|solutionrelative:basicsofcs\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -18,30 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\CardValidator\\Program.cs",
+              "RelativeDocumentMoniker": "CardValidator\\Program.cs",
+              "ToolTip": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\CardValidator\\Program.cs",
+              "RelativeToolTip": "CardValidator\\Program.cs",
+              "ViewState": "AQIAAHQAAAAAAAAAAAAowIYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T11:29:54.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\Task1Doctor\\Doctor.cs",
+              "RelativeDocumentMoniker": "Task1Doctor\\Doctor.cs",
+              "ToolTip": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\Task1Doctor\\Doctor.cs",
+              "RelativeToolTip": "Task1Doctor\\Doctor.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAADkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T08:34:26.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\Task1Doctor\\Program.cs",
+              "RelativeDocumentMoniker": "Task1Doctor\\Program.cs",
+              "ToolTip": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\Task1Doctor\\Program.cs",
+              "RelativeToolTip": "Task1Doctor\\Program.cs",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAwwH8AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T08:32:20.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\BasicsOfCs\\Program.cs",
               "RelativeDocumentMoniker": "BasicsOfCs\\Program.cs",
               "ToolTip": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\BasicsOfCs\\Program.cs",
               "RelativeToolTip": "BasicsOfCs\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAMAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAAgwA0AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-12T04:18:55.694Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Employee.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\BasicsOfCs\\Employee.cs",
               "RelativeDocumentMoniker": "BasicsOfCs\\Employee.cs",
               "ToolTip": "C:\\Users\\VC\\Desktop\\presidio\\day1_github\\day4\\ApplicationBasicsOfCs\\BasicsOfCs\\Employee.cs",
               "RelativeToolTip": "BasicsOfCs\\Employee.cs",
-              "ViewState": "AQIAAD0AAAAAAAAAAIA1wEkAAAAIAAAA",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAAwE8AAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-12T04:29:43.086Z",
               "EditorCaption": ""

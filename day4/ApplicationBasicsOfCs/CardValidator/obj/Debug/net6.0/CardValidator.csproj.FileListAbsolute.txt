@@ -1,0 +1,15 @@
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\bin\Debug\net6.0\CardValidator.exe
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\bin\Debug\net6.0\CardValidator.deps.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\bin\Debug\net6.0\CardValidator.runtimeconfig.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\bin\Debug\net6.0\CardValidator.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\bin\Debug\net6.0\CardValidator.pdb
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.AssemblyInfoInputs.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.AssemblyInfo.cs
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.csproj.CoreCompileInputs.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.sourcelink.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\refint\CardValidator.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.pdb
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\CardValidator.genruntimeconfig.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\CardValidator\obj\Debug\net6.0\ref\CardValidator.dll

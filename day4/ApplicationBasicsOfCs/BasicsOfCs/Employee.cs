@@ -58,7 +58,14 @@ namespace BasicsOfCs
         {
             Id = id;
         }
-
+        /// <summary>
+        /// Constructor to initialize the value of Employees
+        /// </summary>
+        /// <param name="id">Id of Employee</param>
+        /// <param name="name">Name of the Employee</param>
+        /// <param name="salary">Salary Of Employee Without deduction</param>
+        /// <param name="dateOfBirth"> Date of birth Of Employee</param>
+        /// <param name="email">Email of the Employee</param>
         public Employee(int id, string name, double salary, DateTime dateOfBirth, string email) : this(id) // constuctor chaining 
         {
             Name = name;
@@ -66,7 +73,20 @@ namespace BasicsOfCs
             DateOfBirth = dateOfBirth;
             Email = email;
         }
-
+        /// <summary>
+        /// Prints Details of all the employee 
+        /// </summary>
+        public void PrintEmployeeDetails()
+        {
+            Console.WriteLine($"Employee Id \t:\t {Id}");
+            Console.WriteLine($"Employee Name \t:\t {Name}");
+            Console.WriteLine($"Employee Date of Birth \t:\t {DateOfBirth}");
+            Console.WriteLine($"Employee Salary \t:\t {Salary}");
+            Console.WriteLine($"Employee Email \t:\t {Email}");
+        }
+        /// <summary>
+        /// the work employee do 
+        /// </summary>
         public void Work()
         {
             Id = 101;

@@ -1,0 +1,15 @@
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\bin\Debug\net6.0\LearningArray.exe
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\bin\Debug\net6.0\LearningArray.deps.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\bin\Debug\net6.0\LearningArray.runtimeconfig.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\bin\Debug\net6.0\LearningArray.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\bin\Debug\net6.0\LearningArray.pdb
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.AssemblyInfoInputs.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.AssemblyInfo.cs
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.csproj.CoreCompileInputs.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.sourcelink.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\refint\LearningArray.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.pdb
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\LearningArray.genruntimeconfig.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\LearningArray\obj\Debug\net6.0\ref\LearningArray.dll
