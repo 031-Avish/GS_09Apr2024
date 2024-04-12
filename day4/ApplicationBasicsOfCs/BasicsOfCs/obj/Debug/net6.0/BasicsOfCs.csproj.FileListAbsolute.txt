@@ -1,0 +1,15 @@
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\bin\Debug\net6.0\BasicsOfCs.exe
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\bin\Debug\net6.0\BasicsOfCs.deps.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\bin\Debug\net6.0\BasicsOfCs.runtimeconfig.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\bin\Debug\net6.0\BasicsOfCs.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\bin\Debug\net6.0\BasicsOfCs.pdb
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.AssemblyInfoInputs.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.AssemblyInfo.cs
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.csproj.CoreCompileInputs.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.sourcelink.json
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\refint\BasicsOfCs.dll
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.pdb
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\BasicsOfCs.genruntimeconfig.cache
+C:\Users\VC\Desktop\presidio\day1_github\day4\ApplicationBasicsOfCs\BasicsOfCs\obj\Debug\net6.0\ref\BasicsOfCs.dll
