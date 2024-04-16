@@ -1,0 +1,39 @@
+﻿using ReqTrackerModelLibbrary;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ReqTrackerModelLibrary
+{
+    public class PermanentEmployee : Employee
+    {
+        public PermanentEmployee()
+        {
+            Type = "PermanentEmployee";
+        }
+        public PermanentEmployee(int id, string name, DateTime dateOfBirth, double salary):base(id,name,dateOfBirth)
+        {
+            Type = "PermanentEmployee";
+            Salary = salary;
+        }
+        public override void BuildEmployeeFromConsole()
+        {
+            base.BuildEmployeeFromConsole(); ;
+            Console.WriteLine("please Enter Basic Salary");
+            Salary=Convert.ToDouble(Console.ReadLine());    
+
+        }
+        public override void PrintEmployeeDetails()
+        {
+            base.PrintEmployeeDetails();
+            Console.WriteLine("Employee Salary : Rs." + Salary);
+        }
+        public override string ToString()
+        {
+            return base.ToString()
+                + "\n Employee Salary : Rs :" +Salary;
+        }
+    }
+}
