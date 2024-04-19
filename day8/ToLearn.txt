@@ -3,3 +3,16 @@ https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/
 https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism
 
 kudvenkat
+
+structure do not have destructor
+class have 
+
+structure cannot have default constructor 
+class can have 
+
+structure cannot be inherited , they are sealead
+https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/
+
+https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism
+
+kudvenkat
