@@ -11,6 +11,10 @@ namespace PizzaSellingStoreApp
 {
     internal class Program
     {
+        /// <summary>
+        /// To add the ingredients that are available 
+        /// </summary>
+        /// <returns> The object of incredients business logic class </returns>
         IncredientsBL AddIncredient()
         {
             IncredientsBL incredientsBL = new IncredientsBL();
@@ -44,6 +48,11 @@ namespace PizzaSellingStoreApp
             }
             return incredientsBL;
         }
+
+        /// <summary>
+        /// to add the pizza that are avialable in Store
+        /// </summary>
+        /// <returns>Object of pizza bussiness logic class </returns>
         PizzaBL AddPizza()
         {
             PizzaBL pizzaBL = new PizzaBL();
@@ -99,118 +108,180 @@ namespace PizzaSellingStoreApp
             return pizzaBL;
 
         }
+
+
+
         public OrderBL orderBL = new OrderBL();
+
+        /// <summary>
+        /// to get the user preference , it is a healper function 
+        /// </summary>
+        /// <param name="order">Order's object </param>
+        /// <param name="incredientsBL">IncredientBL's object</param>
+        /// <param name="pizza">Pizza's Object</param>
+        /// <returns>retrun 1 if continue part executed else 0</returns>
+
+        int GetPizzaPrefrence(Order order, IncredientsBL incredientsBL, PizzaBL pizza)
+        {
+            Pizza newPizza = new Pizza();
+            Console.WriteLine("---------------------------\n");
+
+            Console.WriteLine("Choose Pizza Of User Choice Enter Id");
+            int id;
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.WriteLine("Invalid entry. Please try again");
+            }
+            Pizza p = pizza.GetPizzaById(id);
+            if (p == null)
+            {
+                Console.WriteLine("Invalid ID !!! Try again");
+                return 1;
+            }
+            newPizza.PizzaId = id;
+            newPizza.Name = p.Name;
+
+            while (true)
+            {
+                Console.WriteLine("----------------------------------\n");
+
+                Console.WriteLine("Choose Pizza Size : ");
+                Console.WriteLine("1 for Small pizza");
+                Console.WriteLine("2 for Medium pizza");
+                Console.WriteLine("3 for Large Pizza");
+                int size;
+                while (!int.TryParse(Console.ReadLine(), out size))
+                {
+                    Console.WriteLine("Invalid entry. Please try again");
+                }
+                if (size == 1)
+                {
+                    newPizza.PriceAccToSize.Add("Small", p.PriceAccToSize["Small"]);
+                    order.TotalCost = order.TotalCost + p.PriceAccToSize["Medium"];
+                    break;
+                }
+                else if (size == 2)
+                {
+                    newPizza.PriceAccToSize.Add("Medium", p.PriceAccToSize["Medium"]);
+                    order.TotalCost = order.TotalCost + p.PriceAccToSize["Small"];
+                    break;
+                }
+                else if (size == 3)
+                {
+                    newPizza.PriceAccToSize.Add("Large", p.PriceAccToSize["Large"]);
+                    order.TotalCost = order.TotalCost + p.PriceAccToSize["Large"];
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Please Enter Correct choice");
+                }
+            }
+            int choice = -1;
+            while (choice != 0)
+            {
+                Console.WriteLine("Choose incredients of Your choice ");
+                //IncredientsBL incredientsBL = new IncredientsBL();
+                int i = 1;
+                foreach (int incredientId in p.Incredients)
+                {
+                    var incredient = incredientsBL.GetIncredientsById(incredientId);
+                    Console.WriteLine($"press {i++} to add :  {incredient.Name} (₹{incredient.Price} per unit)");
+                }
+                Console.WriteLine("Press 0 to stop");
+
+                while (!int.TryParse(Console.ReadLine(), out choice))
+                {
+                    Console.WriteLine("Invalid entry. Please try again");
+                }
+                for (int j = 1; j <= p.Incredients.Count; j++)
+                {
+                    if (choice == j)
+                    {
+                        Incredients incredient = incredientsBL.GetIncredientsById(p.Incredients[j - 1]);
+                        if (incredient.QuantityAvailable <= 0)
+                        {
+                            Console.WriteLine("this incredient is finished , try something else ");
+                            break;
+                        }
+                        newPizza.Incredients.Add(incredient.IncId);
+                        //order.Incredients.Add(incredient);
+                        Console.WriteLine($"{incredient.Name} is added");
+                        order.TotalCost += incredient.Price;
+                        break;
+                    }
+                }
+
+            }
+            order.Pizzas.Add(newPizza);
+            return 0;
+        }
+        /// <summary>
+        ///  to get the contact details of Customer
+        /// </summary>
+        /// <param name="order"> Order's object </param>
+        void GetContactDetails(Order order)
+        {
+            Console.WriteLine("**************************************************\n");
+            Console.WriteLine("You are Almost Done Provide name and contact to place order ");
+            string Cname;
+            string Ccontact;
+            Console.WriteLine("Please Enter Your Name");
+            Cname = Console.ReadLine() ?? String.Empty;
+            Console.WriteLine("Please Enter Your Mobile Number");
+            Ccontact = Console.ReadLine() ?? String.Empty;
+
+            order.ContactInformation = Ccontact;
+            order.CustomerName = Cname;
+            int deliver;
+            Console.WriteLine("---------------------------\n");
+            Console.WriteLine("Enter 1 for Delivery and 2 for Pickup");
+
+            while (!int.TryParse(Console.ReadLine(), out deliver))
+            {
+                Console.WriteLine("Invalid entry. Please try again");
+            }
+            if (deliver == 1)
+            {
+                order.IsDelivery = true;
+                order.TotalCost += 50;
+                Console.WriteLine("Enter dilivery Address");
+                order.Address = Console.ReadLine() ?? string.Empty;
+                Console.WriteLine("50 rs dilivery charge added ");
+
+            }
+            else
+            {
+                Console.WriteLine("You choose for pickup form store");
+            }
+        }
+
+        /// <summary>
+        /// get the choice of pizza from the user 
+        /// </summary>
+        /// <param name="incredientsBL">IncredientsBL's object</param>
+        /// <param name="pizza">Pizza's object</param>
         void AskUserToSelectPizza(IncredientsBL incredientsBL, PizzaBL pizza)
         {
             //PizzaBL pizza = new PizzaBL();
             Order order = new Order();
             
-            
             try
             {
                 while (true)
                 {
-                    Pizza newPizza = new Pizza();
-                    Console.WriteLine("---------------------------\n");
-
-                    Console.WriteLine("Choose Pizza Of User Choice Enter Id");
-                    int id;
-                    while (!int.TryParse(Console.ReadLine(), out id))
-                    {
-                        Console.WriteLine("Invalid entry. Please try again");
-                    }
-                    Pizza p = pizza.GetPizzaById(id);
-                    if (p == null)
-                    {
-                        Console.WriteLine("Invalid ID !!! Try again");
+                    int returnVal = GetPizzaPrefrence(order, incredientsBL, pizza);
+                    if (returnVal == 1)
                         continue;
-                    }
-                    newPizza.PizzaId = id;
-                    newPizza.Name=p.Name;
 
-                    while (true)
-                    {
-                        Console.WriteLine("----------------------------------\n");
-
-                        Console.WriteLine("Choose Pizza Size : ");
-                        Console.WriteLine("1 for Small pizza");
-                        Console.WriteLine("2 for Medium pizza");
-                        Console.WriteLine("3 for Large Pizza");
-                        int size;
-                        while (!int.TryParse(Console.ReadLine(), out size))
-                        {
-                            Console.WriteLine("Invalid entry. Please try again");
-                        }
-                        if (size == 1)
-                        {
-                            newPizza.PriceAccToSize.Add("Small", p.PriceAccToSize["Small"]);
-                            order.TotalCost = order.TotalCost + p.PriceAccToSize["Medium"];
-                            break;
-                        }
-                        else if (size == 2)
-                        {
-                            newPizza.PriceAccToSize.Add("Medium", p.PriceAccToSize["Medium"]);
-                            order.TotalCost = order.TotalCost + p.PriceAccToSize["Small"];
-                            break;
-                        }
-                        else if (size == 3)
-                        {
-                            newPizza.PriceAccToSize.Add("Large", p.PriceAccToSize["Large"]);
-                            order.TotalCost = order.TotalCost + p.PriceAccToSize["Large"];
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Please Enter Correct choice");
-                        }
-                    }
-                    int choice = -1;
-                    while(choice !=0 )
-                    {
-                        Console.WriteLine("Choose incredients of Your choice ");
-                        //IncredientsBL incredientsBL = new IncredientsBL();
-                        int i = 1;
-                        foreach (int incredientId in p.Incredients)
-                        {
-                            var incredient = incredientsBL.GetIncredientsById(incredientId);
-                            Console.WriteLine($"press {i++} to add :  {incredient.Name} (₹{incredient.Price} per unit)");
-                        }
-                        Console.WriteLine("Press 0 to stop");
-
-                        while (!int.TryParse(Console.ReadLine(), out choice))
-                        {
-                            Console.WriteLine("Invalid entry. Please try again");
-                        }
-                        for(int j = 1; j <=p.Incredients.Count; j++)
-                        {
-                            if(choice == j)
-                            {
-                                Incredients incredient = incredientsBL.GetIncredientsById(p.Incredients[j-1]);
-                                if(incredient.QuantityAvailable<=0)
-                                {
-                                    Console.WriteLine("this incredient is finished , try something else ");
-                                    break;
-                                }
-                                newPizza.Incredients.Add(incredient.IncId);
-                                //order.Incredients.Add(incredient);
-                                Console.WriteLine($"{incredient.Name} is added");
-                                order.TotalCost += incredient.Price;
-                                break;
-                            }
-                        }
-                        
-                    }
-                    order.Pizzas.Add(newPizza);
                     Console.WriteLine("---------------------------\n");
-                    
-
                     Console.WriteLine("Congtatulations Your Pizza is added");
                     Console.WriteLine("---------------------------\n");
                     Console.WriteLine("press 1 to order ");
                     Console.WriteLine("press 2 to add mode pizza");
 
                     int inp;
-                    while (!int.TryParse(Console.ReadLine(), out inp) )
+                    while (!int.TryParse(Console.ReadLine(), out inp))
                     {
                         Console.WriteLine("Invalid entry. Please try again");
                     }
@@ -223,40 +294,10 @@ namespace PizzaSellingStoreApp
                     }
                     else if (inp == 2)
                         continue;
-
                 }
+
+                GetContactDetails(order);
                 
-               
-                    Console.WriteLine("**************************************************\n");
-                    Console.WriteLine("You are Almost Done Provide name and contact to place order ");
-                    string Cname;
-                    string Ccontact;
-                    Console.WriteLine("Please Enter Your Name");
-                    Cname = Console.ReadLine() ?? String.Empty;
-                    Console.WriteLine("Please Enter Your Mobile Number");
-                    Ccontact = Console.ReadLine() ?? String.Empty;
-
-                    int deliver;
-                    Console.WriteLine("---------------------------\n");
-                    Console.WriteLine("Enter 1 for Delivery and 2 for Pickup");
-
-                    while (!int.TryParse(Console.ReadLine(), out deliver))
-                    {
-                        Console.WriteLine("Invalid entry. Please try again");
-                    }
-                    if (deliver == 1)
-                    {
-                        order.IsDelivery = true;
-                        order.TotalCost += 50;
-                        Console.WriteLine("Enter dilivery Address");
-                        order.Address = Console.ReadLine() ?? string.Empty;
-                        Console.WriteLine("50 rs dilivery charge added ");
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("You choose for pickup ");
-                    }
 
             }
             catch (PizzaDoesNotExistException de)
@@ -264,6 +305,12 @@ namespace PizzaSellingStoreApp
                 Console.WriteLine(de.Message);
             }
         }
+
+        /// <summary>
+        ///  to show list of all available pizza 
+        /// </summary>
+        /// <param name="incredientsBL"> IncredientsBL's object </param>
+        /// <param name="pizzaBL"> PizzaBL's object</param>
         void ShowListOfPizza(IncredientsBL incredientsBL, PizzaBL pizzaBL)
         {
             try
@@ -286,17 +333,19 @@ namespace PizzaSellingStoreApp
                     Console.WriteLine("Pizza Id        : " + p.PizzaId);
                     Console.WriteLine("Pizza Name      : " + p.Name);
                     Console.WriteLine("Pizza Available : " + p.IsAvailable);
+                    Console.WriteLine();
                     Console.WriteLine("Pizza Price     :");
                     foreach (var price in p.PriceAccToSize)
                     {
-                        Console.WriteLine($"- {price.Key}: ₹{price.Value}");
+                        Console.WriteLine($"~ {price.Key}: {price.Value}");
                     }
 
+                    Console.WriteLine();
                     Console.WriteLine("Pizza Ingredients:");
                     foreach (int incredientId in p.Incredients)
                     {
                         var incredient = incredientsBL.GetIncredientsById(incredientId);
-                        Console.WriteLine($" {incredient.Name} (₹{incredient.Price} per unit)");
+                        Console.WriteLine($"~ {incredient.Name} ({incredient.Price} per unit)");
                     }
                 }
                 AskUserToSelectPizza(incredientsBL, pizzaBL);
@@ -315,16 +364,16 @@ namespace PizzaSellingStoreApp
             program.UserOptions(incredientsBL,pizzaBL);
         }
 
+        /// <summary>
+        /// nav bar for user 
+        /// </summary>
+        /// <param name="incredientsBL"></param>
+        /// <param name="pizzaBL"></param>
         void UserOptions(IncredientsBL incredientsBL , PizzaBL pizzaBL)
         {
             Console.WriteLine("Hello Welcome to Pizza Store");
             Console.WriteLine("Please Select from Given Options");
-
-            
-
             int userInput;
-
-            
 
             while (true)
             {
@@ -353,7 +402,6 @@ namespace PizzaSellingStoreApp
                     {
                         Console.WriteLine(e.Message);
                     }
-
                 }
                 else if(userInput==3)
                 {
@@ -364,9 +412,13 @@ namespace PizzaSellingStoreApp
                 else
                     Console.WriteLine("Choose correct optionn ");
             }
-
         }
 
+        /// <summary>
+        /// to check the availability of incredients 
+        /// </summary>
+        /// <param name="incredientsBL"></param>
+        /// <param name="pizzaBL"></param>
         private void showInventory(IncredientsBL incredientsBL, PizzaBL pizzaBL)
         {
             List<Incredients> incredients= incredientsBL.GetAllIncredient();
@@ -377,6 +429,10 @@ namespace PizzaSellingStoreApp
             }
         }
 
+        /// <summary>
+        /// Method to print the pizza orders 
+        /// </summary>
+        /// <param name="orders"> list of orders </param>
         private void PrintOrder(List<Order> orders)
         {
             foreach (var order in orders)
