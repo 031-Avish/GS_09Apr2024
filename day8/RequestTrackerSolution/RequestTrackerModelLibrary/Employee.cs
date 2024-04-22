@@ -137,7 +137,6 @@
         public static bool operator ==(Employee a, Employee b)
         {
             return a.Id == b.Id;
-
         }
         public static bool operator !=(Employee a, Employee b)
         {

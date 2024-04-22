@@ -10,6 +10,11 @@ namespace PizzaOrderDataAccessLibrary
     public class PizzaRepository : IRepository<int, Pizza>
     {
         readonly Dictionary<int, Pizza> _pizzas;
+
+        public PizzaRepository()
+        {
+            _pizzas = new Dictionary<int, Pizza>();
+        }
         int GenerateId()
         {
             if (_pizzas.Count == 0)
@@ -36,12 +41,14 @@ namespace PizzaOrderDataAccessLibrary
 
         public Pizza Get(int key)
         {
-            throw new NotImplementedException();
+            return _pizzas.ContainsKey(key) ? _pizzas[key] : null;
         }
 
         public List<Pizza> GetAll()
         {
-            throw new NotImplementedException();
+            if (_pizzas.Count == 0)
+                return null;
+            return _pizzas.Values.ToList();
         }
 
         public Pizza Update(Pizza item)

@@ -5,6 +5,11 @@ namespace PizzaOrderDataAccessLibrary
     public class OrderRepository : IRepository<int, Order>
     {
         readonly Dictionary<int, Order> _orders;
+
+        public OrderRepository()
+        {
+            _orders = new Dictionary<int, Order>();
+        }
         int GenerateId()
         {
             if (_orders.Count == 0)

@@ -10,5 +10,8 @@ namespace PizzaAppBLLibrary
     public interface IIncredientServices
     {
         int AddIncredients(Incredients incredients);
+
+        Incredients GetIncredientsById(int id);
+        List<Incredients> GetAllIncredient();
     }
 }

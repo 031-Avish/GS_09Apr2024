@@ -13,6 +13,5 @@ namespace PizzaAppBLLibrary
         Order GetOrderById(int id);
         List<Order> GetAllOrders();
         Order DeleteOrderById(int id);
-        Order UpdateOrderById(int id);
     }
 }

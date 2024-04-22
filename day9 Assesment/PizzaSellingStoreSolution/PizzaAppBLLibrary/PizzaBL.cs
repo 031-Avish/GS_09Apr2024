@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzaAppBLLibrary
 {
-    class PizzaBL : IPizzaServices
+    public class PizzaBL : IPizzaServices
     {
         readonly IRepository<int, Pizza> _pizzaRepository;
         public PizzaBL()
@@ -24,6 +24,27 @@ namespace PizzaAppBLLibrary
                 return result.PizzaId;
             }
             throw new DuplicateOrderException();
+        }
+
+        public List<Pizza> GetAllPizza()
+        {
+            List<Pizza> pizzas=_pizzaRepository.GetAll();
+            if(pizzas!=null)
+            {
+                return pizzas;
+            }
+            throw new PizzaDoesNotExistException();
+
+        }
+
+        public Pizza GetPizzaById(int id)
+        {
+            Pizza pizza = _pizzaRepository.Get(id);
+            if(pizza!=null)
+            {
+                return pizza;
+            }
+            return pizza;
         }
     }
 }

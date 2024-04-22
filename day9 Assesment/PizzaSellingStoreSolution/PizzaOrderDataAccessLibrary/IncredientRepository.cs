@@ -43,7 +43,7 @@ namespace PizzaAppDataAccessLibrary
 
         public Incredients Get(int key)
         {
-            throw new NotImplementedException();
+            return _incredients.ContainsKey(key) ? _incredients[key] : null;
         }
 
         public Incredients Update(Incredients item)

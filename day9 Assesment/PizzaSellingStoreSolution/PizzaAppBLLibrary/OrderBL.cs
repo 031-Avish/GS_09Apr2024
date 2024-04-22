@@ -27,22 +27,33 @@ namespace PizzaAppBLLibrary
 
         public Order DeleteOrderById(int id)
         {
-            throw new NotImplementedException();
+            Order result = _orderRepository.Delete(id); 
+            if (result != null)
+            {
+                return result;
+            }
+            throw new OrderDoesNotExistException();
         }
 
         public List<Order> GetAllOrders()
         {
-            throw new NotImplementedException();
+            List<Order> result = _orderRepository.GetAll();
+            if (result != null)
+            {
+                return result;
+            }
+            throw new OrderDoesNotExistException();
         }
 
         public Order GetOrderById(int id)
         {
-            throw new NotImplementedException();
+            Order order = _orderRepository.Get(id);
+            if (order != null)
+            {
+                return order;
+            }
+            throw new OrderDoesNotExistException();
         }
 
-        public Order UpdateOrderById(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

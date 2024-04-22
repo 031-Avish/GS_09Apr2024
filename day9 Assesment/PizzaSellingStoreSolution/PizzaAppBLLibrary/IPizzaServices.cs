@@ -10,5 +10,7 @@ namespace PizzaAppBLLibrary
     public interface IPizzaServices
     {
         int AddPizza(Pizza pizza);
+        List<Pizza> GetAllPizza();
+        Pizza GetPizzaById(int id);
     }
 }
