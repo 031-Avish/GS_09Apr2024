@@ -9,13 +9,13 @@ namespace DoctorAppointmentBLLibrary
 {
     public interface IAppointmentServices
     {
-        bool ScheduleAppointment(Appointment appointment);
+        int ScheduleAppointment(Appointment appointment);
         List<Appointment> GetAllAppointments();
-        bool CancelAppointment(int id);
-        bool RescheduleAppointment(int id, DateTime newDateTime);
+        int CancelAppointment(int id);
+        int RescheduleAppointment(int id, DateTime newDateTime);
 
         List<Appointment> GetAppointmentsForDoctor(int doctorId);
         List<Appointment> GetAppointmentsForPatient(int patientId);
-        List<Appointment> GetAppointmentsByStatus(Appointment status);
+        List<Appointment> GetAppointmentsByStatus(string status);
     }
 }
