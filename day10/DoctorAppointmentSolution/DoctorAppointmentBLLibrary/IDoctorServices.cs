@@ -9,11 +9,11 @@ namespace DoctorAppointmentBLLibrary
 {
     public interface IDoctorServices
     {
-        int AddDoctor(Doctor doctor);
+        Doctor AddDoctor(Doctor doctor);
 
-        int UpdateDoctor(Doctor doctor);
+        Doctor UpdateDoctor(Doctor doctor);
 
-        int DeleteDoctor(Doctor doctor);
+        Doctor DeleteDoctor(Doctor doctor);
 
         Doctor ChangeAvailability(Doctor doctor, bool availability);
         List<Doctor> GetDoctorsWithSpecialization(string Speciatization);

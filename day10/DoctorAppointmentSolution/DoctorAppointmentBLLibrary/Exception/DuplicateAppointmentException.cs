@@ -2,12 +2,14 @@
 
 namespace DoctorAppointmentBLLibrary.Exception
 {
-    public class PatientDoesNotExistException : System.Exception
+    
+    public class DuplicateAppointmentException : System.Exception
     {
+
         string msg;
-        public PatientDoesNotExistException()
+        public DuplicateAppointmentException()
         {
-            msg = "Patient is not found";
+            msg = "Appointment Already Exists";
         }
 
         public override string Message => msg;

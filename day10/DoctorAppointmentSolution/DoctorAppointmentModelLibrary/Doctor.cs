@@ -18,6 +18,7 @@
             Specialization = string.Empty;
             Experience = 0;
             Fees = 0;
+            AvailableToday = false;
         }
 
         public Doctor(int id, string name, string specialization, double experience, double fees, bool availableToday)

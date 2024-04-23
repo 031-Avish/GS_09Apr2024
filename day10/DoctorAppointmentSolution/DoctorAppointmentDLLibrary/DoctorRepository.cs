@@ -25,11 +25,12 @@ namespace DoctorAppointmentDLLibrary
 
         public Doctor Add(Doctor item)
         {
-            if (_doctors.ContainsValue(item))
+            if (_doctors.ContainsKey(item.DoctorId))
             {
                 return null;
             }
-            _doctors.Add(GenerateId(), item);
+            item.DoctorId = GenerateId();
+            _doctors.Add(item.DoctorId, item);
             return item;
         }
 

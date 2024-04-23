@@ -2,7 +2,6 @@
 
 namespace PizzaAppBLLibrary
 {
-    [Serializable]
     public class IncredientsNotFountException : Exception
     {
         string msg;

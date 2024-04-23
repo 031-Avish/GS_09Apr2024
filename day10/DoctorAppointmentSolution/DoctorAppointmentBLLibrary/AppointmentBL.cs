@@ -1,4 +1,5 @@
-﻿using DoctorAppointmentDLLibrary;
+﻿using DoctorAppointmentBLLibrary.Exception;
+using DoctorAppointmentDLLibrary;
 using DoctorAppointmentModelLibrary;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace DoctorAppointmentBLLibrary
     {
         readonly IRepository<int, Appointment> _appointmentRepository;
 
-        public AppointmentBL()
+        public AppointmentBL(IRepository<int, Appointment> repository)
         {
-            _appointmentRepository = new AppointmentRepository();
+            _appointmentRepository = repository;
         }
 
         public int ScheduleAppointment(Appointment appointment)

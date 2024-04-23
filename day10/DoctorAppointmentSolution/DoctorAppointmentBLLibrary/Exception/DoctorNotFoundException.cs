@@ -2,12 +2,14 @@
 
 namespace DoctorAppointmentBLLibrary.Exception
 {
-    public class PatientDoesNotExistException : System.Exception
+    [Serializable]
+    public class DoctorNotFoundException : System.Exception
     {
+
         string msg;
-        public PatientDoesNotExistException()
+        public DoctorNotFoundException()
         {
-            msg = "Patient is not found";
+            msg = "Doctor does not exists";
         }
 
         public override string Message => msg;

@@ -29,12 +29,14 @@ namespace DoctorAppointmentDLLibrary
             {
                 return null;
             }
-            _appointments.Add(GenerateId(), item);
+            item.AppointmentId = GenerateId();
+            _appointments.Add(item.AppointmentId, item);
             return item;
         }
 
         public Appointment Get(int key)
         {
+            if (_appointments.Count == 0) return null;
             return _appointments[key] ?? null;
         }
 
@@ -57,6 +59,7 @@ namespace DoctorAppointmentDLLibrary
 
         public Appointment Delete(int key)
         {
+            if (_appointments.Count == 0) return null;
             if (_appointments.ContainsKey(key))
             {
                 var appointment = _appointments[key];

@@ -12,20 +12,27 @@ namespace DoctorAppointmentBLLibrary
     public class PatientBL : IPatientServices
     {
         readonly IRepository<int, Patient> _patientRepository;
-        public int AddPatient(Patient patient)
+        
+
+        public PatientBL(IRepository<int, Patient> repository)
+        {
+            _patientRepository = repository;
+        }
+
+        public Patient AddPatient(Patient patient)
         {
             Patient addedPatient = _patientRepository.Add(patient);
 
             if (addedPatient != null)
-                return addedPatient.PatientId;
+                return addedPatient;
             throw new DuplicatePatientFoundException();
         }
 
-        public int DeletePatient(Patient patient)
+        public Patient DeletePatient(int id)
         {
-            Patient deletedPatient = _patientRepository.Delete(patient.PatientId);
+            Patient deletedPatient = _patientRepository.Delete(id);
             if (deletedPatient != null)
-                return deletedPatient.PatientId;
+                return deletedPatient;
             throw new PatientDoesNotExistException();
         }
 
@@ -50,12 +57,12 @@ namespace DoctorAppointmentBLLibrary
             throw new PatientDoesNotExistException();
         }
 
-        public int UpdatePatient(Patient patient)
+        public Patient UpdatePatient(Patient patient)
         {
 
             Patient updatedPatient = _patientRepository.Update(patient);
             if (updatedPatient != null)
-                return updatedPatient.PatientId;
+                return updatedPatient;
             throw new PatientDoesNotExistException();
         }
 

@@ -9,13 +9,13 @@ namespace DoctorAppointmentBLLibrary
 {
     public interface IPatientServices
     {
-        int AddPatient(Patient patient);
+        Patient AddPatient(Patient patient);
         
         Patient GetPatientById(int id); 
         List<Patient> GetAllPatients();
 
-        int UpdatePatient(Patient patient);
-        int DeletePatient(int id);
+        Patient UpdatePatient(Patient patient);
+        Patient DeletePatient(int id);
 
         List<Patient> GetPatientByGender(string gender);
     }

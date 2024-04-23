@@ -29,12 +29,15 @@ namespace DoctorAppointmentDLLibrary
             {
                 return null;
             }
-            _patients.Add(GenerateId(), item);
+            item.PatientId = GenerateId();
+            _patients.Add(item.PatientId, item);
             return item;
         }
 
         public Patient Get(int key)
         {
+            if (_patients.Count == 0)
+                return null;
             return _patients[key] ?? null;
         }
 
