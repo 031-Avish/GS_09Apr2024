@@ -14,7 +14,7 @@ namespace DoctorAppointmentBLLibrary
         Patient GetPatientById(int id); 
         List<Patient> GetAllPatients();
 
-        bool UpdatePatient(Patient patient);
+        int UpdatePatient(Patient patient);
         bool DeletePatient(int id);
 
         List<Patient> GetPatientByGender(string gender);
