@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShoppingBLLibrary\ShoppingBLLibrary.csproj" />
     <ProjectReference Include="..\ShoppingDALLibrary\ShoppingDALLibrary.csproj" />
   </ItemGroup>
 

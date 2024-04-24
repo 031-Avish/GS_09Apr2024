@@ -36,13 +36,16 @@ namespace ShoppingDALLibrary
 
         public override Product Update(Product item)
         {
-            Product product = GetByKey(item.Id);
-            if (product != null)
+            if (items.Count > 0)
             {
-                product = item;
+                var index = items.FindIndex(p => p.Id == item.Id);
+                if (index != -1)
+                {
+                    items[index] = item;
+                    return item;
+                }
             }
-            return product;
-
+            throw new NoProductWithGivenIdException();
         }
     }
 }

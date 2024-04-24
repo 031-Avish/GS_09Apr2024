@@ -30,17 +30,21 @@ namespace ShoppingDALLibrary
                         return items[i];
                 }
             }
-            throw new NoCartWithGivenIdException();
+            throw new NoCartItemWithGivenIdException();
         }
 
         public override CartItem Update(CartItem item)
         {
-            CartItem cartitem = GetByKey(item.CartId);
-            if (cartitem!= null)
+            if (items.Count > 0)
             {
-                cartitem = item;
+                var index = items.FindIndex(c => c.CartId == item.CartId);
+                if (index != -1)
+                {
+                    items[index] = item;
+                    return item;
+                }
             }
-            return cartitem;
+            throw new NoCartItemWithGivenIdException() ;
         }
     }
 }
