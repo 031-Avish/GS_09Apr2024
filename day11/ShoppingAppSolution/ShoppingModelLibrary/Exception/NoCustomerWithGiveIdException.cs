@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingModelLibrary.Exceptions
 {
-    public class NoCustomerWithGiveIdException : Exception
+    public class NoCustomerWithGiveIdException : System.Exception
     {
         string message;
         public NoCustomerWithGiveIdException()

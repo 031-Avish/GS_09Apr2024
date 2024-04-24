@@ -1,4 +1,5 @@
 ﻿using ShoppingModelLibrary;
+using ShoppingModelLibrary.Exception;
 using ShoppingModelLibrary.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,8 @@ namespace ShoppingDALLibrary
                     if (items[i].Id == key)
                         return items[i];
                 }
-                throw new NoCustomerWithGiveIdException();
             }
-            throw new CustomerIsNotPresentException();
+            throw new NoProductWithGivenIdException();
         }
 
         public override Product Update(Product item)
