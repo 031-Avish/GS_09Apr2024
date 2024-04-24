@@ -50,7 +50,7 @@ namespace DoctorAppointmentTest
         }
 
         [Test]
-        public void ChangeAvailability_Fail()
+        public void ChangeAvailability_FailExc()
         {
             // Arrange
             var doctorToUpdate = new Doctor() { Name = "Emily", Specialization = "Pediatrician",
@@ -59,6 +59,7 @@ namespace DoctorAppointmentTest
             // Act & Assert
             Assert.Throws<DoctorNotFoundException>(() => doctorService.ChangeAvailability(doctorToUpdate, true));
         }
+        
 
         [Test]
         public void DeleteDoctor_Success()
@@ -114,6 +115,22 @@ namespace DoctorAppointmentTest
         {
             // Arrange
             var availableDoctors = new List<Doctor>(); // Empty list
+
+            // Act & Assert
+            Assert.Throws<DoctorNotFoundException>(() => doctorService.GetDoctorsavailableToday());
+        }
+        [Test]
+        public void GetDoctorsavailableToday_FailExc()
+        {
+            // Arrange
+            var doctors = new Doctor()
+            {
+                Name = "John",
+                Specialization = "Dentist",
+                Experience = 10,
+                Fees = 200,
+                AvailableToday = false,
+            };
 
             // Act & Assert
             Assert.Throws<DoctorNotFoundException>(() => doctorService.GetDoctorsavailableToday());
