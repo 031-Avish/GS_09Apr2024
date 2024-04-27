@@ -7,17 +7,18 @@ namespace ShoppingDALLibrary
 {
     public class CustomerRepository : AbstractRepository<int, Customer>
     {
-        public override Customer Delete(int key)
+        public override async Task<Customer> Delete(int key)
         {
-            Customer customer = GetByKey(key);
+            Customer customer = items.SingleOrDefault(c => c.Id == key);
             if (customer != null)
             {
-                items.Remove(customer);
+                //items.Remove(customer);
+                customer.IsActive = false;
             }
             return customer;
 
         }
-        public override Customer Add(Customer item)
+        public override async Task<Customer> Add(Customer item)
         {
             if (items.Count > 0)
             {
@@ -29,18 +30,19 @@ namespace ShoppingDALLibrary
                     }
                 }
             }
+            item.IsActive = true;
             items.Add(item);
             return item;
         }
 
-        public override ICollection<Customer> GetAll()
-        {
-            if(items.Count>0)
-                return items;
-            throw new NoCustomerWithGiveIdException();
-        }
+        //public override Task<ICollection<Customer>> GetAll()
+        //{
+        //    if(items.Count>0)
+        //        return items;
+        //    throw new NoCustomerWithGiveIdException();
+        //}
 
-        public override Customer GetByKey(int key)
+        public override async Task<Customer> GetByKey(int key)
         {
             for (int i = 0; i < items.Count; i++)
             {
@@ -50,7 +52,7 @@ namespace ShoppingDALLibrary
             throw new NoCustomerWithGiveIdException();
         }
 
-        public override Customer Update(Customer item)
+        public override async Task<Customer> Update(Customer item)
         {
             if (items.Count > 0)
             {

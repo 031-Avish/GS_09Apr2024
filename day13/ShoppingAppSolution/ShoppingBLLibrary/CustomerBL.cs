@@ -23,26 +23,26 @@ namespace ShoppingBLLibrary
         public Customer AddCustomer(Customer customer)
         {
             var addedCustomer = _customerRepository.Add(customer);
-            return addedCustomer;
+            return addedCustomer.Result;
         }
 
         public Customer UpdateCustomer(Customer customer)
         {
             var updatedCustomer = _customerRepository.Update(customer);
-            return updatedCustomer;
+            return updatedCustomer.Result;
         }
 
         public Customer GetCustomerById(int customerId)
         {
             var customer = _customerRepository.GetByKey(customerId);
-            return customer;
+            return customer.Result;
         }
             
 
         [ExcludeFromCodeCoverage]
         public List<Customer> GetAllCustomers()
         {
-            var customers = _customerRepository.GetAll()?.ToList();
+            var customers = _customerRepository.GetAll().Result?.ToList();
             return customers;
 
         }

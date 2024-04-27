@@ -21,7 +21,7 @@ namespace ShoppingAppTest
             Customer customer = new Customer { Id = 1, Phone = "1234567890", Age = 25 };
 
             // Act
-            var result = repository.Add(customer);
+            var result = repository.Add(customer).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -46,7 +46,7 @@ namespace ShoppingAppTest
             repository.Add(customer);
 
             // Act
-            var result = repository.GetByKey(customer.Id);
+            var result = repository.GetByKey(customer.Id).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -82,11 +82,11 @@ namespace ShoppingAppTest
             Customer customer1 = new Customer { Id = 2, Phone = "1214567890", Age = 29};
             
             // Act
-            Customer result = repository.Add(customer1);
+            Customer result = repository.Add(customer1).Result;
 
             // Assert
-            Assert.AreEqual(2, repository.GetAll().Count);
-            Assert.AreEqual(customer1, repository.GetByKey(2));
+            Assert.AreEqual(2, repository.GetAll().Result.Count)  ;
+            Assert.AreEqual(customer1, repository.GetByKey(2).Result);
         }
 
         [Test]
@@ -106,12 +106,12 @@ namespace ShoppingAppTest
             customer.Phone = "0987654321";
 
             // Act
-            var result = repository.Update(customer);
+            var result = repository.Update(customer).Result;
             // Assert
 
             Assert.IsNotNull(result);
             Assert.AreEqual(customer, result);
-            Assert.IsTrue(repository.GetAll().Contains(customer));
+            Assert.IsTrue(repository.GetAll().Result.Contains(customer));
         }
         [Test]
         public void UpdateCustomerExceptionThrown()
@@ -144,7 +144,7 @@ namespace ShoppingAppTest
             repository.Add(customer);
 
             // Act
-            var result = repository.Delete(customer.Id);
+            var result = repository.Delete(customer.Id).Result;
 
             // Assert
             //Assert.IsNotNull(result);

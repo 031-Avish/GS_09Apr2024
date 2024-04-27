@@ -12,9 +12,9 @@ namespace ShoppingDALLibrary
 {
     public class ProductRepository : AbstractRepository<int, Product>
     {
-        public override Product Delete(int key)
+        public override async Task<Product> Delete(int key)
         {
-            Product product = GetByKey(key);
+            Product product = await GetByKey(key);
             if (product != null)
             {
                 items.Remove(product);
@@ -22,7 +22,7 @@ namespace ShoppingDALLibrary
             return product;
         }
 
-        public override Product Add(Product item)
+        public override async Task<Product> Add(Product item)
         {
             if(items.Count>0)
             {
@@ -37,13 +37,13 @@ namespace ShoppingDALLibrary
             items.Add(item);
             return item;
         }
-        public override ICollection<Product> GetAll()
-        {
-            if (items.Count > 0)
-                return items;
-            throw new NoProductWithGivenIdException();
-        }
-        public override Product GetByKey(int key)
+        //public override ICollection<Product> GetAll()
+        //{
+        //    if (items.Count > 0)
+        //        return items;
+        //    throw new NoProductWithGivenIdException();
+        //}
+        public override async Task<Product> GetByKey(int key)
         {
             if (items.Count > 0)
             {
@@ -56,7 +56,7 @@ namespace ShoppingDALLibrary
             throw new NoProductWithGivenIdException();
         }
 
-        public override Product Update(Product item)
+        public override async Task<Product> Update(Product item)
         {
             if (items.Count > 0)
             {

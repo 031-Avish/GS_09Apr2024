@@ -91,12 +91,12 @@ namespace ShoppingBLLibrary
             {
                 throw new MaxQuantityExceededException();
             }
-            Cart addedCart = _cartRepository.Add(cart);
+            Cart addedCart = _cartRepository.Add(cart).Result;
             return addedCart;
         }
         public Cart AddItemToCart(CartItem cartItem, int customerId)
         {
-            List<Cart> carts = (List<Cart>)_cartRepository.GetAll();
+            List<Cart> carts = (List<Cart>)_cartRepository.GetAll().Result;
             Cart cart = null;
             if (carts!=null)
                 cart = carts.FirstOrDefault(c => c.CustomerId == customerId);
@@ -141,7 +141,7 @@ namespace ShoppingBLLibrary
 
         public Cart RemoveItemFromCart(int cartId, int productId)
         {
-            Cart cart = _cartRepository.GetByKey(cartId);
+            Cart cart = _cartRepository.GetByKey(cartId).Result;
 
             if (cart == null)
             {
@@ -174,13 +174,13 @@ namespace ShoppingBLLibrary
         public Cart UpdateCart(Cart cart)
         {
             var updatedCart = _cartRepository.Update(cart);
-            return updatedCart;
+            return updatedCart.Result;
         }
 
         public Cart GetCartById(int cartId)
         {
             var cart = _cartRepository.GetByKey(cartId);
-            return cart;
+            return cart.Result;
         }
 
         public bool DeleteCart(int cartId)

@@ -24,7 +24,7 @@ namespace ShoppingAppTest
             CartItem cartItem = new CartItem { CartId = 1, ProductId = 101, Quantity = 2, Price = 10.99, Discount = 1.50, PriceExpiryDate = DateTime.Now.AddDays(7) };
 
             // Act
-            var result = repository.Add(cartItem);
+            var result = repository.Add(cartItem).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -52,7 +52,7 @@ namespace ShoppingAppTest
             repository.Add(cartItem);
 
             // Act
-            var result = repository.GetByKey(cartItem.CartId);
+            var result = repository.GetByKey(cartItem.CartId).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -77,7 +77,7 @@ namespace ShoppingAppTest
             repository.Add(cartItem2);
 
             // Act
-            var result = repository.GetAll();
+            var result = repository.GetAll().Result;
 
             // Assert
             Assert.AreEqual(2, result.Count);
@@ -101,7 +101,7 @@ namespace ShoppingAppTest
             cartItem.Quantity = 3;
 
             // Act
-            var result = repository.Update(cartItem);
+            var result = repository.Update(cartItem).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -139,7 +139,7 @@ namespace ShoppingAppTest
             repository.Add(cartItem);
 
             // Act
-            var result = repository.Delete(cartItem.CartId);
+            var result = repository.Delete(cartItem.CartId).Result;
 
             // Assert
             Assert.IsNotNull(result);

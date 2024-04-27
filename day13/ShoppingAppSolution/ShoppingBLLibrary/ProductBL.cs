@@ -24,7 +24,7 @@ namespace ShoppingBLLibrary
         }
         public Product AddProduct(Product product)
         {
-            var addedProduct = _productRepository.Add(product);
+            var addedProduct = _productRepository.Add(product).Result;
             return addedProduct;
 
         }
@@ -32,19 +32,19 @@ namespace ShoppingBLLibrary
         public Product UpdateProduct(Product product)
         {
             var updatedProduct = _productRepository.Update(product);
-            return updatedProduct;
+            return updatedProduct.Result;
         }
 
 
         public Product GetProductById(int productId)
         {
             var product = _productRepository.GetByKey(productId);
-            return product;
+            return product.Result;
         }
 
         public List<Product> GetAllProducts()
         {
-            var products = _productRepository.GetAll()?.ToList();
+            var products = _productRepository.GetAll().Result?.ToList();
             return products;
         }
 

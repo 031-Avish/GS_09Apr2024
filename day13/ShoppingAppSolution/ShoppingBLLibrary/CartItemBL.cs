@@ -37,7 +37,7 @@ namespace ShoppingBLLibrary
                 throw new MaxQuantityExceededException();
             }
             var addedCartItem = _cartItemRepository.Add(cartItem);
-            return addedCartItem;
+            return addedCartItem.Result;
         }
 
         public CartItem UpdateCartItem(CartItem cartItem)
@@ -47,19 +47,19 @@ namespace ShoppingBLLibrary
                 throw new MaxQuantityExceededException();
             }
             var updatedCartItem = _cartItemRepository.Update(cartItem);
-            return updatedCartItem;
+            return updatedCartItem.Result;
         }
 
         public CartItem GetCartItemById(int cartItemId)
         {
             var cartItem = _cartItemRepository.GetByKey(cartItemId);
-                return cartItem;
+                return cartItem.Result;
         }
 
         [ExcludeFromCodeCoverage]
         public List<CartItem> GetAllCartItems()
         {
-            var cartItems = _cartItemRepository.GetAll()?.ToList();
+            var cartItems = _cartItemRepository.GetAll().Result?.ToList();
                 return cartItems;
         }
 

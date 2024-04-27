@@ -12,9 +12,9 @@ namespace ShoppingDALLibrary
 {
     public class CartItemRepository : AbstractRepository<int, CartItem>
     {
-        public override CartItem Delete(int key)
+        public override async Task<CartItem> Delete(int key)
         {
-            CartItem cartitem = GetByKey(key);
+            CartItem cartitem = await GetByKey(key);
             if (cartitem != null)
             {
                 items.Remove(cartitem);
@@ -22,7 +22,7 @@ namespace ShoppingDALLibrary
             return cartitem;
         }
 
-        public override CartItem GetByKey(int key)
+        public override async Task<CartItem> GetByKey(int key)
         {
             if (items.Count > 0)
             {
@@ -35,7 +35,7 @@ namespace ShoppingDALLibrary
             throw new NoCartItemWithGivenIdException();
         }
 
-        public override CartItem Add(CartItem item)
+        public override async Task<CartItem> Add(CartItem item)
         {
             if (items.Count > 0)
             {
@@ -50,13 +50,13 @@ namespace ShoppingDALLibrary
             items.Add(item);
             return item;
         }
-        public override ICollection<CartItem> GetAll()
-        {
-            if (items.Count > 0)
-                return items;
-            throw new NoCartItemWithGivenIdException();
-        }
-        public override CartItem Update(CartItem item)
+        //public override ICollection<CartItem> GetAll()
+        //{
+        //    if (items.Count > 0)
+        //        return items;
+        //    throw new NoCartItemWithGivenIdException();
+        //}
+        public override async Task<CartItem> Update(CartItem item)
         {
             if (items.Count > 0)
             {

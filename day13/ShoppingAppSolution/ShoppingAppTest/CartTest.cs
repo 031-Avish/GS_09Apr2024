@@ -131,7 +131,7 @@ namespace ShoppingAppTest
             Cart cart = new Cart { Id = 1, CustomerId = 101, Customer = new Customer(), CartItems = new List<CartItem>() };
 
             // Act
-            var result = repository.Add(cart);
+            var result = repository.Add(cart).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -172,7 +172,7 @@ namespace ShoppingAppTest
             repository.Add(cart);
 
             // Act
-            var result = repository.GetByKey(cart.Id);
+            var result = repository.GetByKey(cart.Id).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -194,7 +194,7 @@ namespace ShoppingAppTest
             repository.Add(cart1);
 
             // Act
-            var result = repository.GetAll();
+            var result = repository.GetAll().Result;
 
             // Assert
             Assert.AreEqual(1, result.Count);
@@ -232,7 +232,7 @@ namespace ShoppingAppTest
             cart.CustomerId = 102;
 
             // Act
-            var result = repository.Update(cart);
+            var result = repository.Update(cart).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -270,7 +270,7 @@ namespace ShoppingAppTest
             repository.Add(cart);
 
             // Act
-            var result = repository.Delete(cart.Id);
+            var result = repository.Delete(cart.Id).Result;
 
             // Assert
             Assert.IsNotNull(result);

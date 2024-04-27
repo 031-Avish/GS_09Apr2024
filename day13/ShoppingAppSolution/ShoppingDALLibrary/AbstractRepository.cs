@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingModelLibrary.Exception;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,24 +10,26 @@ namespace ShoppingDALLibrary
     public abstract class AbstractRepository<K, T> : IRepository<K, T>
     {
         protected List<T> items = new List<T>();
-        public virtual T Add(T item)
+        public virtual async Task<T> Add(T item)
         {
             items.Add(item);
             return item;
         }
-        public virtual ICollection<T> GetAll()
+        public virtual async Task<ICollection<T>> GetAll()
         {
             //items.Sort();
-            return items;
+            if (items.Count > 0)
+               return items;
+            return null;
         }
 
-        public abstract T Delete(K key);
+        public abstract Task<T> Delete(K key);
 
 
 
-        public abstract T GetByKey(K key);
+        public abstract Task<T> GetByKey(K key);
 
-        public abstract T Update(T item);
+        public abstract Task<T> Update(T item);
 
     }
 }

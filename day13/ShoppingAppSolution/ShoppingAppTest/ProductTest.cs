@@ -30,7 +30,7 @@ namespace ShoppingAppTest
                 QuantityInHand = 10 };
 
             // Act
-            var result = repository.Add(product);
+            var result = repository.Add(product).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -59,11 +59,11 @@ namespace ShoppingAppTest
                QuantityInHand=12};
             // Act
             repository.Add(product);
-            Product result = repository.Add(product1);
+            Product result = repository.Add(product1).Result;
 
             // Assert
-            Assert.AreEqual(2, repository.GetAll().Count);
-            Assert.AreEqual(product1, repository.GetByKey(2));
+            Assert.AreEqual(2, repository.GetAll().Result.Count);
+            Assert.AreEqual(product1, repository.GetByKey(2).Result);
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace ShoppingAppTest
             repository.Add(product);
 
             // Act
-            var result = repository.GetByKey(product.Id);
+            var result = repository.GetByKey(product.Id).Result;
 
             // Assert
             Assert.IsNotNull(result);
@@ -125,12 +125,12 @@ namespace ShoppingAppTest
             product.Price = 15.0;
 
             // Act
-            var result = repository.Update(product);
+            var result = repository.Update(product).Result;
 
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(product, result);
-            Assert.IsTrue(repository.GetAll().Contains(product));
+            Assert.IsTrue(repository.GetAll().Result.Contains(product));
         }
 
 
@@ -169,7 +169,7 @@ namespace ShoppingAppTest
             repository.Add(product);
 
             // Act
-            var result = repository.Delete(product.Id);
+            var result = repository.Delete(product.Id).Result;
 
             // Assert
             Assert.IsNotNull(result);

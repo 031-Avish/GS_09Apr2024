@@ -12,9 +12,9 @@ namespace ShoppingDALLibrary
 {
     public class CartRepository : AbstractRepository<int, Cart>
     {
-        public override Cart Delete(int key)
+        public override async Task<Cart> Delete(int key)
         {
-            Cart cart = GetByKey(key);
+            Cart cart =await GetByKey(key);
             if (cart != null)
             {
                 items.Remove(cart);
@@ -23,7 +23,7 @@ namespace ShoppingDALLibrary
         }
        
         [ExcludeFromCodeCoverage ]
-        public override Cart Add(Cart item)
+        public override async Task<Cart> Add(Cart item)
         {
             if (items.Count > 0)
             {
@@ -35,14 +35,14 @@ namespace ShoppingDALLibrary
                     }
                 }
             }
-            item.Id = GenerateId();
+            item.Id = await GenerateId();
             items.Add(item);
             return item;
 
         }
 
         [ExcludeFromCodeCoverage]
-        private int GenerateId()
+        private async Task<int> GenerateId()
         {
             if (items.Count == 0)
                 return 1;
@@ -50,15 +50,15 @@ namespace ShoppingDALLibrary
             return ++id;
         }
 
-        public override ICollection<Cart> GetAll()
-        {
-            if(items.Count > 0)
-            {
-                return items.ToList<Cart>();
-            }
-            return null;
-        }
-        public override Cart GetByKey(int key)
+        //public override Task<ICollection<Cart>> GetAll()
+        //{
+        //    if(items.Count > 0)
+        //    {
+        //        return items.ToList<Cart>();
+        //    }
+        //    return null;
+        //}
+        public override async Task<Cart> GetByKey(int key)
         {
             for (int i = 0; i < items.Count; i++)
                 {
@@ -68,7 +68,7 @@ namespace ShoppingDALLibrary
             throw new NoCartWithGivenIdException();
         }
 
-        public override Cart Update(Cart item)
+        public override async Task<Cart> Update(Cart item)
         {
 
             if (items.Count > 0)
