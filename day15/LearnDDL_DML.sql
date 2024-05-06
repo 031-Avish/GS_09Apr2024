@@ -109,6 +109,44 @@ insert into Employees(name,DateOfBirth,EmployeeArea,Phone,Email)
 Values('Somu','2001-05-01','FFsF','9988776655','somu@gmail.com')
 select * from Employees
 
+insert into skills(Skill,SkillDescription) values('C','PLT')
+insert into skills(Skill,SkillDescription) values('C++','OOPS'),('Java','Web'),('C#','Web'),('SQL','RDBMS')
+select * from skills
 --Employee Skill- Composite key
 
 Insert into EmployeeSkill values(101,3,8)
+
+
+--Update 
+update Employees set phone = '9876543210'
+where id = 101
+update Employees set phone = '9988776655'
+where id = 102
+
+
+Insert into EmployeeSkill values(102,2,7)
+Insert into EmployeeSkill values(102,3,7)
+
+select * from EmployeeSkill;
+update EmployeeSkill set skillLevel = 8
+where skill = 2 and Employee_id = 101
+
+-- Update the skill level to 5 if it is 7 and to 9 if it is 8 otherwise leave it as it is
+update EmployeeSkill set skillLevel = 
+				case 
+				when skillLevel= 7 then 5
+				when skillLevel = 8 then 9
+				else skillLevel
+				end
+where Employee_id = 101
+
+
+
+Delete from EmployeeSkill --where Employee_id = 105
+
+
+select * from areas
+
+delete from Areas where area ='KKKK'
+-- cannot delete 
+delete from Areas where area = 'DDDD'
