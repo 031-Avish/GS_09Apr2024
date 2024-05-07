@@ -1,0 +1,30 @@
+grant used to grant privileges to a user account.
+
+GRANT privilages_name ON object  TO user;
+
+privileges_name = access rights or the privileges that are
+offered to user
+
+Object  : it is the name of database object to whic
+permission is given 
+
+User : name of the user to whom previlege is given 
+
+Grant Select on users to 'Amit'@'localhost;'
+
+Grant Select,insert, delete , update  on users to 'Amit'@'localhost;'
+
+Grant ALL
+
+Grant Execute ON [Procedure | function ] object to user;\
+
+GRANT EXECUTE ON FUNCTION Calculatesalary TO 'Amit'@'localhost';
+
+Revoking Privileges from a Table
+The Revoke statement is used to revoke some or all of the privileges which have been granted to a user in the past.
+
+REVOKE privileges ON object FROM user;
+
+REVOKE SELECT, INSERT, DELETE, UPDATE ON Users FROM 'Amit'@'localhost'; 
+
+REVOKE ALL ON Users FROM 'Amit'@'localhost'; 
