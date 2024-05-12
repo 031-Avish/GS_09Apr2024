@@ -64,17 +64,24 @@ namespace RequestTrackerBLLibrary
 
         public async Task<IList<Request>> GetAllRequestsByEmployeesByStatus(int adminId, string status)
         {
-            if (await IsAdmin(adminId) == false)
+            try
             {
-                throw new Exception("User is not admin");
+                if (await IsAdmin(adminId) == false)
+                {
+                    throw new Exception("User is not admin");
+                }
+                var requests = await _requestRepository.GetAll();
+                if (requests == null)
+                {
+                    throw new Exception("Request Not Found");
+                }
+                var openRequests = requests.Where(e => e.RequestStatus == status).ToList();
+                return openRequests;
             }
-            var requests= await _requestRepository.GetAll();
-            if(requests == null)
+            catch (Exception ex)
             {
-                throw new Exception("Request Not Found");
+                throw new Exception("Error while getting data"+ ex.Message);
             }
-            requests.Where(e=> e.RequestStatus == status).ToList();
-            return requests;
         }
 
         public async Task<bool> MarkRequestCloseByAdmin(int requestId,int adminId)
@@ -101,6 +108,25 @@ namespace RequestTrackerBLLibrary
             return true;
         }
 
-        
+        public async Task<IList<Request>> GetAllRequestsByAdmin(int adminId)
+        {
+            if (await IsAdmin(adminId) == false)
+            {
+                throw new Exception("User is not admin");
+            }
+            try
+            {
+                var requests = await _requestRepository.GetAll();
+                if (requests == null)
+                {
+                    throw new Exception("Request Not Found");
+                }
+                return requests;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error in getting data");
+            }
+        }
     }
 }

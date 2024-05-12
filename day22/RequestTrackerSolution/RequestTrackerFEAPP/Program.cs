@@ -107,6 +107,26 @@ namespace RequestTrackerFEAPP
 
             return result;
         }
+        public async Task<float> GetValidFloatInput(string prompt)
+        {
+            float result;
+            bool isValidInput = false;
+            do
+            {
+                await Console.Out.WriteAsync(prompt);
+                string userInput = Console.ReadLine();
+
+                isValidInput = float.TryParse(userInput, out result);
+
+                if (!isValidInput)
+                {
+                    await Console.Out.WriteLineAsync("Invalid input. Please enter a valid floating-point number.");
+                }
+            } while (!isValidInput);
+
+            return result;
+        }
+
 
         public async Task<string> GetValidStringInput(string prompt)
         {
@@ -180,18 +200,39 @@ namespace RequestTrackerFEAPP
                 await Console.Out.WriteLineAsync("No request Present");
             }
         }
+        private async Task GetAllRequest()
+        {
+            var requests =await adminBL.GetAllRequestsByAdmin(loggedInEmployee.Id);
+            foreach (Request request in requests)
+            {
+                await Console.Out.WriteLineAsync(request.ToString());
+            }
+            int requestId = await GetValidIntegerInput("Enter the request id to see solutions: ");
+            var selectedRequest = requests.FirstOrDefault(r => r.RequestNumber == requestId);
+            if (selectedRequest != null && selectedRequest.RequestSolutions != null)
+            {
+                foreach (var sol in selectedRequest.RequestSolutions)
+                {
+                    await Console.Out.WriteLineAsync(sol.ToString());
+                }
+            }
+            else
+            {
+                await Console.Out.WriteLineAsync("Request not found or has no solutions.");
+            }
 
+        }
 
         private async Task AddRequestSolutionByAdmin()
         {
             var allRequests=await GetAllOpenRequestsByAdmin();
-            int requestId = await GetValidIntegerInput("Enter the request id: ");
 
-            if(allRequests.Count != 0)
+            if(allRequests.Count <= 0)
             {
-                await Console.Out.WriteLineAsync("NO Request Present So can't add Solution");
+                await Console.Out.WriteLineAsync("No Open Request Present to add Solution");
                 return;
             }
+            int requestId = await GetValidIntegerInput("Enter the request id to see solutions: ");
             var selectedRequest = allRequests.FirstOrDefault(r => r.RequestNumber == requestId);
             if (selectedRequest != null && selectedRequest.RequestSolutions != null)
             {
@@ -242,10 +283,12 @@ namespace RequestTrackerFEAPP
         {
             string requestStatus = "Open";
             var allRequests = await adminBL.GetAllRequestsByEmployeesByStatus(loggedInEmployee.Id, requestStatus);
-
-            foreach (var request in allRequests)
+            if (allRequests.Count > 0)
             {
-                await Console.Out.WriteLineAsync(request.ToString());
+                foreach (var request in allRequests)
+                {
+                    await Console.Out.WriteLineAsync(request.ToString());
+                }
             }
             return allRequests;
             
@@ -289,6 +332,22 @@ namespace RequestTrackerFEAPP
                 return false;
             }
             return true;
+        }
+        async Task AddFeedback()
+        {
+
+            int solutionId = await GetValidIntegerInput("Enter the solution id: ");
+            float rating = await GetValidFloatInput("Enter rating for solution: ");
+            string remark = await GetValidStringInput("Enter Remark for solution: ");
+            var solutionFeedback = employeeRequestBL.AddSolutionFeedback(rating, remark, solutionId, loggedInEmployee.Id);
+            if (solutionFeedback != null)
+            {
+                await Console.Out.WriteLineAsync("feedback added successfully");
+            }
+            else
+            {
+                await Console.Out.WriteLineAsync("failed to add feedback");
+            }
         }
         async Task ResponseToSolution()
         {
@@ -338,7 +397,7 @@ namespace RequestTrackerFEAPP
                 await Console.Out.WriteLineAsync(request.ToString());
             }
             await EmployeeSolutionMenu();
-            int choice = await GetUserChoice(0, 3);
+            int choice = await GetUserChoice(0, 4);
             bool flag = false;
             while (!flag)
             {
@@ -355,6 +414,10 @@ namespace RequestTrackerFEAPP
                         await AcceptSolution();
                         flag = true;
                         break;
+                    case 3:
+                        await AddFeedback();
+                        flag = true;
+                        break;
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
@@ -366,13 +429,14 @@ namespace RequestTrackerFEAPP
         {
             await Console.Out.WriteLineAsync("1. Reply to Request Solution");
             await Console.Out.WriteLineAsync("2. Accept Solution");
+            await Console.Out.WriteLineAsync("3. Add Feedback to solution");
             await Console.Out.WriteLineAsync("0. Exit");
         }
         async Task DisplayAdminMenu()
         {
             await Console.Out.WriteLineAsync("5. Add Solution to Request");
             await Console.Out.WriteLineAsync("6. Close Request");
-            
+            await Console.Out.WriteLineAsync("7. Get All Requests and Solutions");
         }
 
         async Task DisplayEmployeeMenu()
@@ -380,9 +444,9 @@ namespace RequestTrackerFEAPP
             //await Console.Out.WriteLineAsync(loggedInEmployee.ToString());
             await Console.Out.WriteLineAsync("0. Exit");
             await Console.Out.WriteLineAsync("1. Add Request");
-            await Console.Out.WriteLineAsync("2. View All Request");
-            await Console.Out.WriteLineAsync("3. View All Request By Status");
-            await Console.Out.WriteLineAsync("4. View Request Solution");
+            await Console.Out.WriteLineAsync("2. View All Your Request");
+            await Console.Out.WriteLineAsync("3. View All Your Request By Status");
+            await Console.Out.WriteLineAsync("4. View Your Request Solution");
             if (loggedInEmployee != null && loggedInEmployee.Role == "Admin")
             {
                 await DisplayAdminMenu();
@@ -396,7 +460,7 @@ namespace RequestTrackerFEAPP
             {
                 await DisplayEmployeeMenu();
                 int minChoice = 0;
-                int maxChoice = loggedInEmployee != null && loggedInEmployee.Role == "Admin" ? 6 : 5;
+                int maxChoice = loggedInEmployee != null && loggedInEmployee.Role == "Admin" ? 7 : 5;
 
                 int choice = await GetUserChoice(minChoice, maxChoice);
                 switch (choice)
@@ -421,7 +485,9 @@ namespace RequestTrackerFEAPP
                     case 6:
                         await CloseRequestByAdmin();
                         break;
-
+                    case 7:
+                        await GetAllRequest();
+                        break;
                     case 0:
                         await Logout();
                         flag = false;

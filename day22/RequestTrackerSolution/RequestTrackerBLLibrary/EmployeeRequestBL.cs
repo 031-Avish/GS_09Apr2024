@@ -51,6 +51,19 @@ namespace RequestTrackerBLLibrary
             throw new Exception("No such employee");
         }
 
+        public async Task<SolutionFeedback> AddSolutionFeedback(float rating, string remark, int solutionId, int EmployeeId)
+        {
+            RequestSolution requestSolution =await _requestSolutionRepository.GetByKey(solutionId);
+            if (requestSolution != null)
+            {
+                SolutionFeedback solutionFeedback = new SolutionFeedback(rating,remark,solutionId,EmployeeId);
+                await _solutionFeedbackRepository.Add(solutionFeedback);
+                return solutionFeedback;
+            }
+            throw new Exception("No Solution present");
+            
+        }
+
         public async Task<IList<Request>> GetAllRequestByStatus(int employeeId, string status)
         {
             var requests = await _requestRepository.GetAll();

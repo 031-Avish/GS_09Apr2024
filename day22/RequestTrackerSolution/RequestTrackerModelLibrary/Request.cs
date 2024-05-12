@@ -30,7 +30,7 @@ namespace RequestTrackerModelLibrary
         public override string ToString()
         {
             return $"\n************************************* \n" +
-                $"Request Details are " +
+                $"Request Details are\n" +
                 $"Request Number: {RequestNumber}\n" +
                 $"Message: {RequestMessage}\n" +
                 $"Request Date: {RequestDate}\n" +

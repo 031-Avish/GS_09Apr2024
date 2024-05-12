@@ -41,7 +41,7 @@ namespace RequestTrackerModelLibrary
                 $"Description: {SolutionDescription}" +
                 $"\nSolved By: {SolvedBy}\n" +
                 $"Is Solved: {IsSolved}\n" +
-                $"Raiser Comment: {RequestRaiserComment ?? "N/A"}" +
+                $"Raiser Comment: {RequestRaiserComment ?? "N/A"}\n" +
                 $"***************************************\n";
         }
     }
