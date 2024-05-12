@@ -10,16 +10,20 @@ namespace RequestTrackerBLLibrary
 {
     public class EmployeeRequestBL : IEmployeeRequestBL
     {
-        private readonly IRepository<int, Request> _repository;
-
+        private readonly IRepository<int, Request> _requestRepository;
+        private readonly IRepository<int, Employee> _employeeRepository;
+        private readonly IRepository<int, RequestSolution> _requestSolutionRepository;
+        private readonly IRepository<int,SolutionFeedback> _solutionFeedbackRepository;
         public EmployeeRequestBL()
         {
-            IRepository<int, Employee> repo = new EmployeeRequestRepository(new RequestTrackerContext());
-            
+            _requestRepository = new RequestRepository(new RequestTrackerContext());
+            _employeeRepository = new EmployeeRepository(new RequestTrackerContext());
+            _requestSolutionRepository = new RequestSolutionRepository(new RequestTrackerContext());
+            _solutionFeedbackRepository = new SolutionFeedbackRepository(new RequestTrackerContext());
         }
         public Task<Request> AddRequest(int EmployeeId, string RequestMessage)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<List<Request>> GetAllRequestForEmployeeById(int employeeId)

@@ -12,16 +12,16 @@ namespace RequestTrackerBLLibrary
             _repository = repo;
         }
 
-        public async Task<bool> Login(Employee employee)
+        public async Task<Employee> Login(Employee employee)
         {
 
-            var emp = await _repository.Get(employee.Id);
+            var emp = await _repository.GetByKey(employee.Id);
             if (emp != null)
             {
                 if (emp.Password == employee.Password)
-                    return true;
+                    return emp;
             }
-            return false;
+            return null;
         }
 
         public async Task<Employee> Register(Employee employee)

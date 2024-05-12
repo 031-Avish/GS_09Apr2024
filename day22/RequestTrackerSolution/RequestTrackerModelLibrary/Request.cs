@@ -22,6 +22,10 @@ namespace RequestTrackerModelLibrary
         public Employee RequestClosedByEmployee { get; set; }
         public ICollection<RequestSolution> RequestSolutions { get; set; }
 
-
+        public Request(string requestMessage, int requestRaisedBy)
+        {
+            RequestMessage = requestMessage;
+            RequestRaisedBy = requestRaisedBy;
+        }
     }
 }

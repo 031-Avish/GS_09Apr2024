@@ -11,8 +11,8 @@ namespace RequestTrackerDALLibrary
      public class SolutionFeedbackRepository:IRepository<int,SolutionFeedback>
     {
         protected readonly RequestTrackerContext _context;
-        public SolutionFeedbackRepository() {
-            _context = new RequestTrackerContext();
+        public SolutionFeedbackRepository(RequestTrackerContext context) {
+            _context = context;
         }
 
         public async Task<SolutionFeedback> Add(SolutionFeedback entity)
