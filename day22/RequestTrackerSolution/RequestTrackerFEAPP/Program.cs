@@ -152,28 +152,59 @@ namespace RequestTrackerFEAPP
         //}
         private async Task ViewAllRequestByStatus()
         {
-            string requestStatus = await GetValidStringInput("Enter Open/Closed to get corresponding requests ");
+            string requestStatus = await GetValidStringInput("Enter Open/Closed to get corresponding requests : ");
             var allRequestByStatus = await employeeRequestBL.GetAllRequestByStatus(loggedInEmployee.Id, requestStatus);
+            if(allRequestByStatus.Count!=0)
             foreach (var request in allRequestByStatus)
             {
                 await Console.Out.WriteLineAsync(request.ToString());
+            }
+            else
+            {
+                await Console.Out.WriteLineAsync("No Request will given Request Status");
             }
         }
         
         private async Task ViewAllRequest()
         {
             List<Request> requests = await employeeRequestBL.GetAllRequestForEmployeeById(loggedInEmployee.Id);
-            foreach (Request request in requests)
+            if (requests.Count != 0)
             {
-                await Console.Out.WriteLineAsync(request.ToString());
+                foreach (Request request in requests)
+                {
+                    await Console.Out.WriteLineAsync(request.ToString());
+                }
+            }
+            else
+            {
+                await Console.Out.WriteLineAsync("No request Present");
             }
         }
 
 
         private async Task AddRequestSolutionByAdmin()
         {
-            await GetAllOpenRequestsByAdmin();
+            var allRequests=await GetAllOpenRequestsByAdmin();
             int requestId = await GetValidIntegerInput("Enter the request id: ");
+
+            if(allRequests.Count != 0)
+            {
+                await Console.Out.WriteLineAsync("NO Request Present So can't add Solution");
+                return;
+            }
+            var selectedRequest = allRequests.FirstOrDefault(r => r.RequestNumber == requestId);
+            if (selectedRequest != null && selectedRequest.RequestSolutions != null)
+            {
+                foreach (var sol in selectedRequest.RequestSolutions)
+                {
+                    await Console.Out.WriteLineAsync(sol.ToString());
+                }
+            }
+            else
+            {
+                await Console.Out.WriteLineAsync("Request not found or has no solutions.");
+            }
+
             string solutionDescription = await GetValidStringInput("Enter the solution description: ");
             var solution = await adminBL.AddSolutionByAdmin(requestId, solutionDescription, loggedInEmployee.Id);
             if (solution != null)
@@ -183,48 +214,81 @@ namespace RequestTrackerFEAPP
             }
             else
             {
-                await Console.Out.WriteLineAsync("Solution failed");
+                await Console.Out.WriteLineAsync("Solution failed to add ");
             }
         }
 
 
         private async Task CloseRequestByAdmin()
         {
-            await DisplayAllOpenAndAcceptedSolutionByEmployeeRequests();
+            if(await DisplayAllOpenAndAcceptedSolutionByEmployeeRequests() == false)
+            {
+                return;
+            }
             int requestId = await GetValidIntegerInput("Enter the request id: ");
-            await adminBL.MarkRequestCloseByAdmin(requestId, loggedInEmployee.Id);
+            var request = await adminBL.MarkRequestCloseByAdmin(requestId, loggedInEmployee.Id);
+            if(request)
+            {
+                await Console.Out.WriteLineAsync("Request Closed Successfully");
+            }
+            else
+            {
+                await Console.Out.WriteLineAsync("Request is not closed Some error");
+            }
+
+
         }
-        private async Task GetAllOpenRequestsByAdmin()
+        private async Task<IList<Request>> GetAllOpenRequestsByAdmin()
         {
             string requestStatus = "Open";
             var allRequests = await adminBL.GetAllRequestsByEmployeesByStatus(loggedInEmployee.Id, requestStatus);
+
             foreach (var request in allRequests)
             {
                 await Console.Out.WriteLineAsync(request.ToString());
             }
+            return allRequests;
+            
         }
-        private async Task DisplayAllOpenAndAcceptedSolutionByEmployeeRequests()
+        private async Task<bool> DisplayAllOpenAndAcceptedSolutionByEmployeeRequests()
         {
             if (loggedInEmployee.Role != "Admin")
             {
                 await Console.Out.WriteLineAsync("You are not authorized to perform this operation");
-                return;
+                return false;
             }
             var allRequests = await adminBL.GetAllRequestsByEmployeesByStatus(loggedInEmployee.Id, "Open");
             var allRequestWithAcceptedSolutions = allRequests.SelectMany(e => e.RequestSolutions).Where(e => e.IsSolved == true);
-
-            foreach (var request in allRequestWithAcceptedSolutions)
+            if (allRequestWithAcceptedSolutions.Count() > 0)
             {
-                await Console.Out.WriteLineAsync(request.ToString());
+                foreach (var request in allRequestWithAcceptedSolutions)
+                {
+                    await Console.Out.WriteLineAsync(request.ToString());
+                }
+                return true;
             }
+            else
+            {
+                await Console.Out.WriteLineAsync("Nothing to close !!");
+            }
+            return false;
         }
-        private async Task DisplayAllOpenedRequestOfEmployee()
+        private async Task<bool> DisplayAllOpenedRequestOfEmployee()
         {
             var allRequests = await employeeRequestBL.GetAllRequestByStatus(loggedInEmployee.Id, "Open");
-            foreach (var request in allRequests)
+            if (allRequests.Count() > 0)
             {
-                await Console.Out.WriteLineAsync(request.ToString());
+                foreach (var request in allRequests)
+                {
+                    await Console.Out.WriteLineAsync(request.ToString());
+                }
             }
+            else
+            {
+                await Console.Out.WriteLineAsync("No Open request Found");
+                return false;
+            }
+            return true;
         }
         async Task ResponseToSolution()
         {
@@ -258,10 +322,13 @@ namespace RequestTrackerFEAPP
         }
         private async Task ViewRequestSolution()
         {
-            await DisplayAllOpenedRequestOfEmployee();
+            if(await DisplayAllOpenedRequestOfEmployee() == false)
+            {
+                return;
+            }
             int requestId = await GetValidIntegerInput("Enter the request id: ");
             var allNotAcceptedSolutions = await employeeRequestBL.GetAllRequestSolution(requestId);
-            if(allNotAcceptedSolutions != null)
+            if(allNotAcceptedSolutions.Count==0)
             {
                 await Console.Out.WriteLineAsync("No Solution is given Until Now");
                 return;

@@ -35,7 +35,14 @@ namespace RequestTrackerModelLibrary
         }
         public override string ToString()
         {
-            return SolutionId+" " + SolutionDescription + " " + SolvedBy + " " + IsSolved + " "+ RequestRaiserComment;
+            return $"\n**********************************\n" +
+                $"Solution ID: {SolutionId}\n" +
+                $"Request ID: {RequestId}\n" +
+                $"Description: {SolutionDescription}" +
+                $"\nSolved By: {SolvedBy}\n" +
+                $"Is Solved: {IsSolved}\n" +
+                $"Raiser Comment: {RequestRaiserComment ?? "N/A"}" +
+                $"***************************************\n";
         }
     }
 }

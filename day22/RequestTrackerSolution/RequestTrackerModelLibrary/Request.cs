@@ -29,7 +29,15 @@ namespace RequestTrackerModelLibrary
         }
         public override string ToString()
         {
-            return RequestNumber + " " + RequestMessage + " " + RequestDate + " " + RequestStatus;
+            return $"\n************************************* \n" +
+                $"Request Details are " +
+                $"Request Number: {RequestNumber}\n" +
+                $"Message: {RequestMessage}\n" +
+                $"Request Date: {RequestDate}\n" +
+                $"Request RaisedBy: {RequestRaisedBy}\n" +
+                $"Status: {RequestStatus}\n" +
+                $"*****************************************\n";
         }
+
     }
 }

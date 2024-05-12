@@ -8,7 +8,12 @@
         public string Role { get; set; }
         public override string ToString()
         {
-            return Id + " " + Name + " " + Role;
+            return $"\n************************************\n" +
+                $"Employee Detail is \n" +
+                $"Employee ID: {Id}" +
+                $"\nEmployee Name: {Name}" +
+                $"\nEmployee Role: {Role} \n" +
+                $"*****************************************\n";
         }
         public virtual bool PasswordCheck(string password)
         {
