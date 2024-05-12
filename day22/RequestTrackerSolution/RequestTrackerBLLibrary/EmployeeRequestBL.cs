@@ -21,14 +21,30 @@ namespace RequestTrackerBLLibrary
             _requestSolutionRepository = new RequestSolutionRepository(new RequestTrackerContext());
             _solutionFeedbackRepository = new SolutionFeedbackRepository(new RequestTrackerContext());
         }
-        public Task<Request> AddRequest(int EmployeeId, string RequestMessage)
+        public async Task<Request> AddRequest(int EmployeeId, string RequestMessage)
         {
-            
+            Employee employee =await _employeeRepository.GetByKey(EmployeeId);
+            if (employee !=null)
+            {
+                Request request = new Request(RequestMessage,EmployeeId);
+                await _requestRepository.Add(request);
+                return request;
+            }
+            throw new Exception("No such employee");
         }
 
-        public Task<List<Request>> GetAllRequestForEmployeeById(int employeeId)
+        public async Task<List<Request>> GetAllRequestForEmployeeById(int employeeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var requests = await _requestRepository.GetAll();
+                return requests.Where(e => e.RequestRaisedBy == employeeId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to get all Requests");
+            }
+
         }
 
         public Task<List<RequestSolution>> GetAllRequestSolution(int requestId)

@@ -27,5 +27,9 @@ namespace RequestTrackerModelLibrary
             RequestMessage = requestMessage;
             RequestRaisedBy = requestRaisedBy;
         }
+        public override string ToString()
+        {
+            return RequestNumber + " " + RequestMessage + " " + RequestDate + " " + RequestStatus;
+        }
     }
 }

@@ -7,7 +7,13 @@ namespace RequestTrackerFEAPP
 {
     internal class Program
     {
-        private static Employee loggedInEmployee;
+        private static Employee loggedInEmployee=null;
+
+        static async Task Main(string[] args)
+        {
+            var program = new Program();
+            await program.MainMenu();
+        }
         async Task EmployeeLoginAsync(int username, string password)
         {
             Employee employee = new Employee() { Password = password,Id=username };
@@ -16,15 +22,16 @@ namespace RequestTrackerFEAPP
             if (result!=null)
             {
                 await Console.Out.WriteLineAsync("Login Success");
+                loggedInEmployee = employee;
             }
             else
             {
                 Console.Out.WriteLine("Invalid username or password");
             }
         }
-        async Task EmployeeRegisterAsync(int username, string password)
+        async Task EmployeeRegisterAsync(string name, string password, string role)
         {
-            Employee employee = new Employee() { Password = password, Id = username };
+            Employee employee = new Employee() { Name =name, Password=password, Role=role };
             IEmployeeLoginBL employeeLoginBL = new EmployeeLoginBL();
             var result = await employeeLoginBL.Register(employee);
             if (result != null)
@@ -39,9 +46,10 @@ namespace RequestTrackerFEAPP
         }
         async Task GetRegisterDetails()
         {
-            int id = await GetValidIntegerInput("Please enter Employee Id");
+            string name = await GetValidStringInput("Please enter Employee Name");
             string password = await GetValidStringInput("Please enter your password");
-            await EmployeeRegisterAsync(id, password);
+            string role = await GetValidStringInput("Please Enter Role");
+            await EmployeeRegisterAsync(name,password,role);
         }
         async Task Logout()
         {
@@ -56,17 +64,7 @@ namespace RequestTrackerFEAPP
             await EmployeeLoginAsync(id,password);
         }
 
-        static async Task Main(string[] args)
-        {
-            if (loggedInEmployee != null)
-            {
-                await new Program().EmployeeMenu();
-            }
-            else
-            {
-                await new Program().MainMenu();
-            }
-        }
+        
 
         async Task EmployeeMenu()
         {
@@ -164,11 +162,7 @@ namespace RequestTrackerFEAPP
         }
         private async Task AddRequest()
         {
-            IEmployeeRequestBL employeeRequestBL = new EmployeeRequestBL
-                (new EmployeeRepository(new RequestTrackerContext()),
-                new RequestRepository(new RequestTrackerContext()),
-                new RequestSolutionRepository(new RequestTrackerContext()),
-                new SolutionFeedbackRepository(new RequestTrackerContext()));
+            throw new NotImplementedException();
         }
 
         private async Task ViewRequestSolution()
@@ -182,7 +176,8 @@ namespace RequestTrackerFEAPP
 
         async Task MainMenu()
         {
-            while (true)
+            bool flag = true;
+            while (flag)
             {
                 await DisplayMainMenu();
                 int choice = await GetUserChoice(1, 3);
@@ -190,13 +185,25 @@ namespace RequestTrackerFEAPP
                 {
                     case 1:
                         await GetLoginDeatils();
+                        if (loggedInEmployee != null)
+                        {
+                            await EmployeeMenu();
+                        }
                         break;
                     case 2:
                         await GetRegisterDetails();
+                        if (loggedInEmployee != null)
+                        {
+                            await EmployeeMenu();
+                        }
                         break;
                     case 3:
                         await Logout();
-                        return;
+                        flag = true;
+                        break;
+                    default:
+                        await Console.Out.WriteLineAsync("Wrong Choice Try Again");
+                        break;
                 }
             }
         }
