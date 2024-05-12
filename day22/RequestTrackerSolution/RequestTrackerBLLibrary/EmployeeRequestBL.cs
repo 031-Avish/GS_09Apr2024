@@ -21,6 +21,24 @@ namespace RequestTrackerBLLibrary
             _requestSolutionRepository = new RequestSolutionRepository(new RequestTrackerContext());
             _solutionFeedbackRepository = new SolutionFeedbackRepository(new RequestTrackerContext());
         }
+
+        public async Task<RequestSolution> AcceptSolution(int solutionId)
+        {
+            try
+            {
+                var solution = await _requestSolutionRepository.GetByKey(solutionId);
+                if (solution == null)
+                    throw new Exception("No Solution found ");
+                solution.IsSolved = true;
+                await _requestSolutionRepository.Update(solution);
+                return solution;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while Accepting solution");
+            }
+        }
+
         public async Task<Request> AddRequest(int EmployeeId, string RequestMessage)
         {
             Employee employee =await _employeeRepository.GetByKey(EmployeeId);
@@ -31,6 +49,12 @@ namespace RequestTrackerBLLibrary
                 return request;
             }
             throw new Exception("No such employee");
+        }
+
+        public async Task<IList<Request>> GetAllRequestByStatus(int employeeId, string status)
+        {
+            var requests = await _requestRepository.GetAll();
+            return requests.Where(e => e.RequestRaisedBy == employeeId && e.RequestStatus == status).ToList();
         }
 
         public async Task<List<Request>> GetAllRequestForEmployeeById(int employeeId)
