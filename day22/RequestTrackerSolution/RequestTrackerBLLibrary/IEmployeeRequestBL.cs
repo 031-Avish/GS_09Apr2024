@@ -15,6 +15,8 @@ namespace RequestTrackerBLLibrary
         public Task<string> GetRequestStatusById(int requestId);
         public Task<List<Request>> GetAllRequestForEmployeeById(int employeeId);
         public Task<List<RequestSolution>> GetAllRequestSolution(int requestId);
+        public Task<IList<Request>> GetAllRequestByStatus(int employeeId, string status);
+        public Task<RequestSolution> AcceptSolution(int solutionId);
         public Task<RequestSolution> ResponseToSolution(int solutionId,string response); 
     }
 }

@@ -92,6 +92,10 @@ namespace RequestTrackerBLLibrary
         public async Task<RequestSolution> ResponseToSolution(int solutionId, string response)
         {
             var solutions=await _requestSolutionRepository.GetByKey(solutionId);
+            if(solutions==null)
+            {
+                throw new Exception("Request Solution Not Found ");
+            }
             solutions.RequestRaiserComment=response;
             await _requestSolutionRepository.Update(solutions);
             return solutions;

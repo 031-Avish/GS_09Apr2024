@@ -11,7 +11,8 @@ namespace RequestTrackerBLLibrary
     {
          //Provide Solution
         public Task<RequestSolution> AddSolutionByAdmin(int requestId, String SolutionDesc,int adminId);
-        public Task<List<RequestSolution>> GetAllRequestsByEmployees();
-        public Task<bool> MarkRequestCloseByAdmin(int requestId);
+        public Task<IList<Request>> GetAllRequestsByEmployeesByStatus(int adminId,string Status);
+
+        public Task<bool> MarkRequestCloseByAdmin(int requestId,int adminId);
     }
 }

@@ -22,13 +22,20 @@ namespace RequestTrackerModelLibrary
 
         public Employee SolvedByEmployee { get; set; }
 
-        public DateTime SolvedDate { get; set; }
+        public DateTime SolvedDate { get; set; }= DateTime.Now;
         public bool IsSolved { get; set; } = false;
         public string? RequestRaiserComment { get; set; }
         public ICollection<SolutionFeedback> Feedbacks { get; set; }
 
-
-
-
+        public RequestSolution(int requestId, string solutionDescription, int solvedBy)
+        {
+            RequestId = requestId;
+            SolutionDescription = solutionDescription;
+            SolvedBy = solvedBy;
+        }
+        public override string ToString()
+        {
+            return SolutionId+" " + SolutionDescription + " " + SolvedBy + " " + IsSolved + " "+ RequestRaiserComment;
+        }
     }
 }
