@@ -47,24 +47,30 @@ namespace RequestTrackerBLLibrary
 
         }
 
-        public Task<List<RequestSolution>> GetAllRequestSolution(int requestId)
+        public async Task<List<RequestSolution>> GetAllRequestSolution(int requestId)
         {
-            throw new NotImplementedException();
+            var solutions =await _requestSolutionRepository.GetAll();
+            return solutions.Where(s=>s.RequestId == requestId).ToList();
         }
 
-        public Task<Request> GetRequestById(int requestId)
+        public async Task<Request> GetRequestById(int requestId)
         {
-            throw new NotImplementedException();
+            var request=await _requestRepository.GetByKey(requestId);
+            return request;
         }
 
-        public Task<string> GetRequestStatusById(int requestId)
+        public async Task<string> GetRequestStatusById(int requestId)
         {
-            throw new NotImplementedException();
+            var request = await _requestRepository.GetByKey(requestId);
+            return request.RequestStatus;
         }
 
-        public Task<RequestSolution> ResponseToSolution(int solutionId, string response)
+        public async Task<RequestSolution> ResponseToSolution(int solutionId, string response)
         {
-            throw new NotImplementedException();
+            var solutions=await _requestSolutionRepository.GetByKey(solutionId);
+            solutions.RequestRaiserComment=response;
+            await _requestSolutionRepository.Update(solutions);
+            return solutions;
         }
     }
 }

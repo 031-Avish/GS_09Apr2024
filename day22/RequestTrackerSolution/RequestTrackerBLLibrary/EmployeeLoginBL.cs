@@ -15,7 +15,7 @@ namespace RequestTrackerBLLibrary
         public async Task<Employee> Login(Employee employee)
         {
 
-            var emp = await _repository.GetByKey(employee.Id);
+            Employee emp = await _repository.GetByKey(employee.Id);
             if (emp != null)
             {
                 if (emp.Password == employee.Password)

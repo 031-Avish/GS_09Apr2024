@@ -18,7 +18,7 @@ namespace RequestTrackerDALLibrary
         }
         public async Task<Request> Add(Request entity)
         {
-            _context.Requests.Add(entity);
+            _context.Add(entity);
             await _context.SaveChangesAsync();
             return entity;
         }

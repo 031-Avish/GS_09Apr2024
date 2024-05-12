@@ -12,8 +12,8 @@ using RequestTrackerModelLibrary;
 namespace RequestTrackerModelLibrary.Migrations
 {
     [DbContext(typeof(RequestTrackerContext))]
-    [Migration("20240510110120_feedbacks")]
-    partial class feedbacks
+    [Migration("20240512100526_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,7 +97,7 @@ namespace RequestTrackerModelLibrary.Migrations
                     b.Property<DateTime?>("ClosedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RequestClosedBy")
+                    b.Property<int?>("RequestClosedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RequestDate")
@@ -196,8 +196,7 @@ namespace RequestTrackerModelLibrary.Migrations
                     b.HasOne("RequestTrackerModelLibrary.Employee", "RequestClosedByEmployee")
                         .WithMany("RequestsClosed")
                         .HasForeignKey("RequestClosedBy")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RequestTrackerModelLibrary.Employee", "RaisedByEmployee")
                         .WithMany("RequestsRaised")

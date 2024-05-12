@@ -8,7 +8,7 @@ namespace RequestTrackerFEAPP
     internal class Program
     {
         private static Employee loggedInEmployee=null;
-
+        static EmployeeRequestBL employeeRequestBL = new EmployeeRequestBL();
         static async Task Main(string[] args)
         {
             var program = new Program();
@@ -22,8 +22,8 @@ namespace RequestTrackerFEAPP
             if (result!=null)
             {
                 await Console.Out.WriteLineAsync("Login Success");
-                loggedInEmployee = employee;
-            }
+                await Console.Out.WriteLineAsync(result.ToString());
+                loggedInEmployee = result; }
             else
             {
                 Console.Out.WriteLine("Invalid username or password");
@@ -101,6 +101,8 @@ namespace RequestTrackerFEAPP
             await Console.Out.WriteLineAsync("3. View Request Solution");
             await Console.Out.WriteLineAsync("4. Reply to Request Solution");
             await Console.Out.WriteLineAsync("0. Exit");
+            await Console.Out.WriteLineAsync(loggedInEmployee.Name);
+            await Console.Out.WriteLineAsync(loggedInEmployee.Role);
             if (loggedInEmployee != null && loggedInEmployee.Role == "Admin")
             {
                 await DisplayAdminMenu();
@@ -162,7 +164,9 @@ namespace RequestTrackerFEAPP
         }
         private async Task AddRequest()
         {
-            throw new NotImplementedException();
+            //EmployeeRequestBL employeeRequestBL = new EmployeeRequestBL();
+            string message = await GetValidStringInput("Please Enter Your Message");
+            await  employeeRequestBL.AddRequest(loggedInEmployee.Id, message);
         }
 
         private async Task ViewRequestSolution()
@@ -171,7 +175,12 @@ namespace RequestTrackerFEAPP
         }
         private async Task ViewAllRequest()
         {
-            throw new NotImplementedException();
+            List<Request> requests = await employeeRequestBL.GetAllRequestForEmployeeById(loggedInEmployee.Id);
+            foreach (Request request in requests)
+            {
+                await Console.Out.WriteLineAsync(request.ToString());
+            }
+
         }
 
         async Task MainMenu()
@@ -199,7 +208,7 @@ namespace RequestTrackerFEAPP
                         break;
                     case 3:
                         await Logout();
-                        flag = true;
+                        flag = false;
                         break;
                     default:
                         await Console.Out.WriteLineAsync("Wrong Choice Try Again");

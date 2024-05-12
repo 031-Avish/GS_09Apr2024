@@ -18,7 +18,7 @@ namespace RequestTrackerModelLibrary
         public string RequestStatus { get; set; } = "Open";
         public int RequestRaisedBy { get; set; }
         public Employee RaisedByEmployee { get; set; }
-        public int RequestClosedBy { get; set; }
+        public int? RequestClosedBy { get; set; }
         public Employee RequestClosedByEmployee { get; set; }
         public ICollection<RequestSolution> RequestSolutions { get; set; }
 
