@@ -2,6 +2,7 @@ using DoctorAppointmentApp.Contexts;
 using DoctorAppointmentApp.Interfaces;
 using DoctorAppointmentApp.Models;
 using DoctorAppointmentApp.Repositories;
+using DoctorAppointmentApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace DoctorAppointmentApp
@@ -25,6 +26,7 @@ namespace DoctorAppointmentApp
 
             builder.Services.AddScoped<IRepository<int, Doctor>, DoctorRepository>();
 
+            builder.Services.AddScoped<IDoctorService, DoctorBasicServices>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -2,14 +2,13 @@
 
 namespace DoctorAppointmentApp.Exceptions
 {
-    public class NoSuchDoctorException : Exception
+    public class NoDoctorsFoundException : Exception
     {
         string msg;
-        public NoSuchDoctorException()
+        public NoDoctorsFoundException()
         {
-            msg = "No such Doctor is found";
+            msg = "There is not any Doctor present";
         }
         public override string Message => msg;
-
     }
 }
