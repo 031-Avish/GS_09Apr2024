@@ -1,0 +1,86 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using PizzaStoreApp.Interfaces;
+using PizzaStoreApp.Models;
+using PizzaStoreApp.Models.DTOs;
+
+namespace PizzaStoreApp.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PizzaController : ControllerBase
+    {
+        private readonly IPizzaServices _pizzaService;
+
+        public PizzaController(IPizzaServices pizzaService)
+        {
+            _pizzaService = pizzaService;
+        }
+        [Route("GetPizzasInStock")]
+        [HttpGet]
+        [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<OrderDTO>> Get()
+        {
+            try
+            {
+                var result = await _pizzaService.GetPizzasInStock();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new ErrorModel(StatusCodes.Status404NotFound, ex.Message));
+            }
+        }
+        [Route("AddPizza")]
+        [HttpPost]
+        [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<OrderDTO>> Add(PizzaDTO pizzaDTO)
+        {
+            try
+            {
+                var result = await _pizzaService.AddPizza(pizzaDTO);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new ErrorModel(StatusCodes.Status400BadRequest, ex.Message));
+            }
+        }
+        [Route("UpdateStock")]
+        [HttpPut]
+        [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<OrderDTO>> Update([FromBody] int id, int stock)
+        {
+            try
+            {
+                var result = await _pizzaService.UpdatePizzaStock(id, stock);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new ErrorModel(StatusCodes.Status404NotFound, ex.Message));
+            }
+        }
+        [Route("GetAllPizza")]
+        [HttpGet]
+        [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<OrderDTO>> GetAll()
+        {
+            try
+            {
+                var result = await _pizzaService.GetAllPizzas();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new ErrorModel(StatusCodes.Status404NotFound, ex.Message));
+            }
+        }
+
+    }
+}

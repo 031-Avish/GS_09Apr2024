@@ -14,6 +14,20 @@ namespace DoctorAppointmentApp.Controllers
         { 
             _doctorService = doctorService;
         }
+        [Route("AddDoctor")]
+        [HttpPost]
+        public async Task<ActionResult<Doctor>> Add(Doctor doctor)
+        {
+            try
+            {
+                var doc=await _doctorService.AddDoctor(doctor);
+                return doctor;
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet]
         public async Task<ActionResult<IList<Doctor>>> Get()
@@ -28,7 +42,7 @@ namespace DoctorAppointmentApp.Controllers
                 return NotFound(ndfe.Message);
             }
         }
-
+        [Route("UpdateDoctorExperience")]
         [HttpPut]
         public async Task<ActionResult<Doctor>> Put(int id, float experience)
         {

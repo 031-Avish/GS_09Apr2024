@@ -13,6 +13,19 @@ namespace DoctorAppointmentApp.Services
             _repository = repository;
         }
 
+        public async Task<Doctor> AddDoctor(Doctor doctor)
+        {
+            try
+            {
+                var doc = await _repository.Add(doctor);
+                return doc;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to add doctor");
+            }
+        }
+
         public async Task<IEnumerable<Doctor>> GetAllDoctor()
         {
             var doctors = await _repository.GetAll();
