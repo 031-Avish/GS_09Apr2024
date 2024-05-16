@@ -6,7 +6,7 @@ namespace PizzaStoreApp.Interfaces
     public interface IPizzaServices
     {
         Task<IEnumerable<PizzaDTO>> GetPizzasInStock();
-        Task<PizzaDTO> AddPizza(PizzaDTO pizzaDTO);
+        Task<AddPizzaDTO> AddPizza(AddPizzaDTO addPizzaDTO);
         Task<IEnumerable<PizzaDTO>> GetAllPizzas();
         Task<PizzaDTO> UpdatePizzaStock(int id, int stock);
     }

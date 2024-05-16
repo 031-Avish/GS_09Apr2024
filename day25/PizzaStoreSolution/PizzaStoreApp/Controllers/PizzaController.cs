@@ -37,11 +37,11 @@ namespace PizzaStoreApp.Controllers
         [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<OrderDTO>> Add(PizzaDTO pizzaDTO)
+        public async Task<ActionResult<PizzaDTO>> Add(AddPizzaDTO addPizzaDTO)
         {
             try
             {
-                var result = await _pizzaService.AddPizza(pizzaDTO);
+                var result = await _pizzaService.AddPizza(addPizzaDTO);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -53,11 +53,11 @@ namespace PizzaStoreApp.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<OrderDTO>> Update([FromBody] int id, int stock)
+        public async Task<ActionResult<PizzaDTO>> Update(UpdatePizzaDTO updatePizzaDTO)
         {
             try
             {
-                var result = await _pizzaService.UpdatePizzaStock(id, stock);
+                var result = await _pizzaService.UpdatePizzaStock(updatePizzaDTO.Id, updatePizzaDTO.Stock);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace PizzaStoreApp.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(PizzaDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<OrderDTO>> GetAll()
+        public async Task<ActionResult<PizzaDTO>> GetAll()
         {
             try
             {

@@ -15,6 +15,8 @@ namespace PizzaStoreApp.Services
         public async Task<OrderDTO> AddOrder(OrderDTO orderDTO)
         {
             var order = MapOrderDTOToOrder(orderDTO);
+            // we have to check pizza is availalable or not and more things 
+            // reduce quantity etc.... 
             order = await _repository.Add(order);
             if (order == null)
             {

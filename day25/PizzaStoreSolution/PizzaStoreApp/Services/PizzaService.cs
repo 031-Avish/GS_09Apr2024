@@ -13,26 +13,25 @@ namespace PizzaStoreApp.Services
             _repository = repository;
         }
 
-        public async Task<PizzaDTO> AddPizza(PizzaDTO pizzaDTO)
+        public async Task<AddPizzaDTO> AddPizza(AddPizzaDTO addPizzaDTO)
         {
-            var pizza = MapPizzaDTOToPizza(pizzaDTO);
+            var pizza = MapPizzaDTOToPizza(addPizzaDTO);
             pizza = await _repository.Add(pizza);
             if (pizza == null)
             {
                 throw new Exception("Not able to add Pizza");
             }
-            return pizzaDTO;
+            return addPizzaDTO;
             
         }
-        private Pizza MapPizzaDTOToPizza(PizzaDTO pizzaDTO)
+        private Pizza MapPizzaDTOToPizza(AddPizzaDTO addPizzaDTO)
         {
             Pizza pizza = new Pizza()
             {
-                Id = pizza.Id,
-                Name = pizzaDTO.Name,
-                QuantityInStock = pizzaDTO.QuantityInStock,
-                Price = pizzaDTO.Price,
-                Description = pizzaDTO.Description,
+                Name = addPizzaDTO.Name,
+                QuantityInStock = addPizzaDTO.QuantityInStock,
+                Price = addPizzaDTO.Price,
+                Description = addPizzaDTO.Description,
             };
             return pizza;
         }

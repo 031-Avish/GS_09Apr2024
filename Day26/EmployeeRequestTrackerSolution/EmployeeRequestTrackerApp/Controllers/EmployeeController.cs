@@ -1,6 +1,7 @@
 ﻿using EmployeeRequestTrackerApp.Exceptions;
 using EmployeeRequestTrackerApp.Interfaces;
 using EmployeeRequestTrackerApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRequestTrackerApp.Controllers
@@ -15,7 +16,7 @@ namespace EmployeeRequestTrackerApp.Controllers
         {
             _employeeService = employeeService;
         }
-
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(typeof(IList<Employee>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status404NotFound)]
@@ -32,7 +33,7 @@ namespace EmployeeRequestTrackerApp.Controllers
                 return NotFound(new ErrorModel(404, nefe.Message));
             }
         }
-
+        [Authorize]
         [HttpPut]
         [ProducesResponseType(typeof(Employee), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status404NotFound)]
@@ -49,6 +50,7 @@ namespace EmployeeRequestTrackerApp.Controllers
                 return NotFound(new ErrorModel(404, nsee.Message));
             }
         }
+        [Authorize]
         [Route("GetEmployeeByPhone")]
         [HttpPost]
         public async Task<ActionResult<Employee>> Get([FromBody] string phone)
