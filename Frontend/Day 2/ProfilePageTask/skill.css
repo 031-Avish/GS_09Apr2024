@@ -1,0 +1,45 @@
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading h2 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.heading span {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skills-list {
+    flex: 1;
+    padding: 20px;
+}
+
+.skill-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.skill-item h3 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.skill-item span {
+    font-size: 1em;
+    color: #555;
+}
