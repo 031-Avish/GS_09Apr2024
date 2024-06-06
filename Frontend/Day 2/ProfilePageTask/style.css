@@ -51,9 +51,8 @@
     margin-left: 20%;
     margin-right: 20%;
     position: relative;
-    min-height: 100vh;
+    min-height: 60vh;
     display: flex;
-    justify-content:center;
     align-items: center;
     gap: 1rem;
   }
@@ -86,4 +85,23 @@
   .home-img img {
     width: 50%;
   }
+
+  .social {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    margin: auto;
+  }
+ 
+  .social a {
+    margin-bottom: 1rem;
+    font-size: 22px;
+    color: 0f0c27;
+  }
+
+  @media (max-width: 1100px) {
+    .home{
+      flex-direction: column;
+    }
+    }
   
