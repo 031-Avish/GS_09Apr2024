@@ -1,0 +1,84 @@
+@import "colorvars";
+
+@mixin general-home($backclor,$frontcolor,$type){
+    background-color: $backclor;
+    color:if($type==error,red,$frontcolor);
+    border: $bcolor 2px solid;
+}
+
+div{
+   @include general-home($gcolor,$fcolor,normal);
+}
+
+section.normal{
+    @include general-home(green,white,normal);
+}
+section.error{
+    @include general-home(green,white,error);
+}
+
+nav{
+    ul{
+        padding: 3px;
+    }
+    li{
+        padding: 10px;
+        display: inline-block;
+    }
+    a{
+        text-decoration: none;
+    }
+}
+
+// @import "colorvars";
+
+// @mixin general-home($backclor,$frontcolor){
+//     background-color: $backclor;
+//     color:$frontcolor;
+// }
+
+// div{
+//    @include general-home($gcolor,$fcolor);
+// }
+
+// section{
+//     @include general-home(green,white);
+//     border: $bcolor 2px solid;
+// }
+
+// nav{
+//     ul{
+//         padding: 3px;
+//     }
+//     li{
+//         padding: 10px;
+//         display: inline-block;
+//     }
+//     a{
+//         text-decoration: none;
+//     }
+// }
+
+
+// $bodyColor:pink;
+
+// div{
+//     background-color: $bodyColor;
+// }
+
+// section{
+//     background-color: $bodyColor;
+// }
+
+// nav{
+//     ul{
+//         padding: 3px;
+//     }
+//     li{
+//         padding: 10px;
+//         display: inline-block;
+//     }
+//     a{
+//         text-decoration: none;
+//     }
+// }
