@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DATA TABLE</title>
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <style>
+    .outer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 40px 210px;
+        gap: 20px;
+        position: relative;
+        width: 1440px;
+        height: 860px;
+        background: #F7F9FC;
+        border-radius: 12px;
+    }
+
+    .container {
+        width: 1020px;
+        height: 740px;
+        margin: auto;
+        overflow-y: scroll;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 0px 1px rgba(152, 161, 178, 0.1), 0px 1px 4px rgba(69, 75, 87, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+
+    }
+    .svg-search{
+        width: 16px;
+        height: 16px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        MARGIN-TOP: 12PX;
+
+    }
+    
+    .table-header {
+        display: flex;
+        padding: .5em 1em;
+        background: #f7f9fd;
+        position: sticky;
+    }
+
+    .table-header .header-left {
+        flex: 1;
+        display: flex;
+    }
+
+    .filter-container {
+        display: flex;
+        gap: 1em;
+    } 
+
+    .filter-container .search-container {
+        display: flex;
+        gap: 1em;
+        border: 1px solid #c3c7cd;
+        padding: 0 1em;
+        border-radius: .4em;
+        background: white;
+    }
+
+    .filter-container .search-input {
+        outline: none;
+        border: none;
+        width: 100%;
+    }
+
+    .header-right {
+        display: flex;
+    }
+
+    .add-cust-btn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 6px 12px;
+        gap: 8px;
+        position: absolute;
+        width: 146px;
+        height: 32px;
+        right: 20px;
+        top: 16px;
+        background: #2264E6;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 0px 1px #2264E6, 0px 2px 5px rgba(34, 100, 230, 0.12), inset 0px 1px 0px #4B85FA;
+        border-radius: 6px;
+    }
+
+    .table-content {
+        flex: 1;
+        position: relative;
+        overflow: auto;
+    }
+
+
+    .table-content table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: .875em;
+    }
+
+    .table-content thead {
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #E9EDF5;
+    }
+
+    .table-content thead th,
+    .table-content tbody td {
+        padding: .8em;
+        text-align: start;
+    }
+
+    .table-content thead th {
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+        font-weight: 600;
+        color: #464F60;
+    }
+
+    .table-content tbody td {
+        color: #2E3B52;
+        font-size: .95em;
+    }
+
+
+    .table-content .desc {
+        max-width: 15em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+
+
+    .table-content tbody tr {
+        background: white;
+    }
+
+    .table-content tbody tr:nth-child(2n+1) {
+        background: #f7f9ff;
+    }
+
+    .table-content tbody td .name {
+        font-weight: 600;
+        color: #171C26;
+    }
+
+    .table-content tbody td .id {
+        color: #687182;
+        margin-top: 4px;
+    }
+
+    .table-content tbody td .primary-td {
+        color: #464F60;
+        margin-top: 4px;
+    }
+
+    .loss {
+        color: #D12953 !important;
+    }
+
+    .gain {
+        color: #14804A !important;
+    }
+
+    .table-content tbody td .secondary-td {
+        color: #687182;
+        margin-top: 4px;
+    }
+
+    .status-card {
+        padding: .3em .7em;
+        border-radius: 50em;
+    }
+
+    .status-card.open {
+        color: #4F5AED;
+        background: #F0F1FA;
+    }
+
+    .status-card.paid {
+        color: #14804A;
+        background: #E1FCEF;
+    }
+
+    .status-card.inactive {
+        color: #5A6376;
+        background: #E9EDF5;
+    }
+
+    .status-card.paid {
+        color: #14804A;
+        background: #E1FCEF;
+    }
+
+    .status-card.due {
+        color: #D12953;
+        background: #FAF0F3;
+    }
+
+    .table-content tbody tr:hover {
+        background: rgb(236, 236, 236);
+        cursor: default;
+    }
+
+    .table-content input[type=checkbox] {
+        cursor: pointer;
+        width: 1em;
+        scale: 1.2;
+    }
+  </style>
+    </head>
+    <body>
+        <div class="outer">
+            <div class="container">
+                <header class="table-header">
+                    <div class="header-left">
+                        <div class="filter-container">
+                            <div class="filter-icon">
+                                <svg width="50" height="42" viewBox="0 0 50 42"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g filter="url(#filter0_ddd_1376_3190)">
+                                        <rect x="5" y="3" width="40" height="32"
+                                            rx="6" fill="white" />
+                                        <path
+                                            d="M30.79 13.6156C31.3029 12.9591 30.8351 12 30.002 12H20.0019C19.1687 12 18.7009 12.9591 19.2138 13.6156L24.0398 19.7287C24.1772 19.9045 24.2518 20.1212 24.2518 20.3443V25.7961C24.2518 25.9743 24.4672 26.0635 24.5932 25.9375L25.6054 24.9254C25.6991 24.8316 25.7518 24.7044 25.7518 24.5718V20.3443C25.7518 20.1212 25.8264 19.9045 25.9638 19.7287L30.79 13.6156Z"
+                                            fill="#464F60" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_ddd_1376_3190" x="0"
+                                            y="0" width="50" height="42"
+                                            filterUnits="userSpaceOnUse"
+                                            color-interpolation-filters="sRGB">
+                                            <feflood flood-opacity="0"
+                                                result="BackgroundImageFix" />
+                                            <fecolormatrix in="SourceAlpha"
+                                                type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                result="hardAlpha" />
+                                            <feoffset dy="2" />
+                                            <fegaussianblur
+                                                stdDeviation="2.5" />
+                                            <fecolormatrix type="matrix"
+                                                values="0 0 0 0 0.34902 0 0 0 0 0.376471 0 0 0 0 0.470588 0 0 0 0.1 0" />
+                                            <feblend mode="normal"
+                                                in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_1376_3190" />
+                                            <fecolormatrix in="SourceAlpha"
+                                                type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                result="hardAlpha" />
+                                            <femorphology radius="1"
+                                                operator="dilate"
+                                                in="SourceAlpha"
+                                                result="effect2_dropShadow_1376_3190" />
+                                            <feoffset />
+                                            <fecolormatrix type="matrix"
+                                                values="0 0 0 0 0.27451 0 0 0 0 0.308497 0 0 0 0 0.376471 0 0 0 0.16 0" />
+                                            <feblend mode="normal"
+                                                in2="effect1_dropShadow_1376_3190"
+                                                result="effect2_dropShadow_1376_3190" />
+                                            <fecolormatrix in="SourceAlpha"
+                                                type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                result="hardAlpha" />
+                                            <feoffset dy="1" />
+                                            <fegaussianblur
+                                                stdDeviation="0.5" />
+                                            <fecolormatrix type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" />
+                                            <feblend mode="normal"
+                                                in2="effect2_dropShadow_1376_3190"
+                                                result="effect3_dropShadow_1376_3190" />
+                                            <feblend mode="normal"
+                                                in="SourceGraphic"
+                                                in2="effect3_dropShadow_1376_3190"
+                                                result="shape" />
+                                        </filter>
+                                    </defs>
+                                </svg>
+                               
+
+                            </div>
+                            <div class="search-container">
+                                <svg class="svg-search" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6821 11.7458C9.66576 12.5361 8.38866 13.0067 7.00167 13.0067C3.68704 13.0067 1 10.3189 1 7.00335C1 3.68779 3.68704 1 7.00167 1C10.3163 1 13.0033 3.68779 13.0033 7.00335C13.0033 8.39059 12.533 9.66794 11.743 10.6845L14.7799 13.7186C15.0731 14.0115 15.0734 14.4867 14.7806 14.7799C14.4878 15.0731 14.0128 15.0734 13.7196 14.7805L10.6821 11.7458ZM11.5029 7.00335C11.5029 9.49002 9.48765 11.5059 7.00167 11.5059C4.5157 11.5059 2.50042 9.49002 2.50042 7.00335C2.50042 4.51668 4.5157 2.50084 7.00167 2.50084C9.48765 2.50084 11.5029 4.51668 11.5029 7.00335Z" fill="#868FA0"/>
+                                    </svg>
+                                    
+                                <input placeholder="Search" type="text"
+                                    class="search-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        
+                            
+                        <button class="add-cust-btn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.74999 2.75004C8.74999 2.33582 8.4142 2.00004 7.99999 2.00004C7.58578 2.00004 7.24999 2.33582 7.24999 2.75004V7.25H2.75C2.33579 7.25 2 7.58579 2 8C2 8.41422 2.33579 8.75 2.75 8.75H7.24999L7.25 13.25C7.25 13.6642 7.58579 14 8 14C8.41421 14 8.75 13.6642 8.75 13.25L8.74999 8.75H13.25C13.6642 8.75 14 8.41422 14 8C14 7.58579 13.6642 7.25 13.25 7.25H8.74999V2.75004Z" fill="white"/>
+                                </svg>
+                            <span>Add customer</span>
+                        </button>
+                    </div>
+                </header>
+                <div class="table-content">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" name id></th>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Rate</th>
+                                <th scope="col">Balance</th>
+                                <th scope="col">Deposit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>1</td>
+                                <td>
+                                    <div class="name">Name 1</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 1</td>
+                                <td>
+                                    <span
+                                        class="status-card status-card open">Open</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td loss">-$350.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>2</td>
+                                <td>
+                                    <div class="name">Name 2</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 2</td>
+                                <td>
+                                    <span class="status-card paid">Paid</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td gain">+$670.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>3</td>
+                                <td>
+                                    <div class="name">Name 3</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 3</td>
+                                <td>
+                                    <span
+                                        class="status-card inactive">Inactive</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td loss">-$20.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>4</td>
+                                <td>
+                                    <div class="name">Name 4</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 4</td>
+                                <td>
+                                    <span
+                                        class="status-card status-card open">Open</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td gain">$270.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>5</td>
+                                <td>
+                                    <div class="name">Name 5</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 5</td>
+                                <td>
+                                    <span class="status-card paid">Paid</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td loss">-$270.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>6</td>
+                                <td>
+                                    <div class="name">Name 6</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 6</td>
+                                <td>
+                                    <span
+                                        class="status-card inactive">Inactive</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td loss">-$350.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>7</td>
+                                <td>
+                                    <div class="name">Name 7</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 7</td>
+                                <td>
+                                    <span
+                                        class="status-card status-card open">Open</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td gain">+$670.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>8</td>
+                                <td>
+                                    <div class="name">Name 8</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 8</td>
+                                <td>
+                                    <span class="status-card paid">Paid</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td loss">-$20.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>9</td>
+                                <td>
+                                    <div class="name">Name 9</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 9</td>
+                                <td>
+                                    <span
+                                        class="status-card inactive">Inactive</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td gain">$270.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name id></td>
+                                <td>10</td>
+                                <td>
+                                    <div class="name">Name 10</div>
+                                    <div class="id">3487654</div>
+                                </td>
+                                <td clas="desc">Description 10</td>
+                                <td>
+                                    <span
+                                        class="status-card status-card open">Open</span>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$70.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td loss">-$270.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                                <td>
+                                    <div class="primary-td">$500.00</div>
+                                    <div class="secondary-td">CAD</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
