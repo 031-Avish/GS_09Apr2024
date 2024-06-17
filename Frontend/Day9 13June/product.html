@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* CSS for the table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* CSS for the form */
+        .form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .form-container input
+        {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-container button {
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width:100%;
+        }
+        #error{
+            font-weight: 600;
+            color: red;
+        }
+        #success{
+            font-weight: 600;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <hr>
+    <form class="form-container" >
+        
+        <h1>Add Product</h1>
+
+        <p id="error"></p>
+        <p id="success"></p>
+        <label for="product-name">Product Name:</label>
+        <input type="text" id="product-name" name="product-name" >
+        
+        <label for="product-price">Product Price:</label>
+        <input type="number" id="product-price" name="product-price" >
+        
+        <label for="product-quantity">Product Quantity:</label>
+        <input type="number" id="product-quantity" name="product-quantity" >
+        
+        <label for="product-description">Product Description:</label>
+        <textarea id="product-description" name="product-description" ></textarea>
+        <br>
+        <button type="submit">Submit</button>
+        
+    </form>
+    <br>
+    <table>
+        <h1>Product List </h1>
+        <hr>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Product Quantity</th>
+            <th>Product Description</th>
+        </tr>
+        <tr>
+            <td>Product 1</td>
+            <td>$10</td>
+            <td>5</td>
+            <td>Description 1</td>
+        </tr>
+        <tr>
+            <td>Product 2</td>
+            <td>$20</td>
+            <td>3</td>
+            <td>Description 2</td>
+        </tr>
+        <tr>
+            <td>Product 3</td>
+            <td>$15</td>
+            <td>2</td>
+            <td>Description 3</td>
+        </tr>
+        <tr>
+            <td>Product 4</td>
+            <td>$25</td>
+            <td>4</td>
+            <td>Description 4</td>
+        </tr>
+    </table>
+
+    <script>
+        document.getElementById("product-name").addEventListener('change', function() {
+            var productNameInput = document.getElementById("product-name");
+            if (productNameInput.value.length > 3) {
+                productNameInput.style.border = "2px solid green";
+            } else {
+                productNameInput.style.border = "2px solid red";
+            }
+            return;
+        });
+        document.getElementById("product-price").addEventListener('change', function() {
+            var productPriceInput = document.getElementById("product-price");
+
+            if (productPriceInput.value > 0) {
+                productPriceInput.style.border = "2px solid green";
+            } else {
+                productPriceInput.style.border = "2px solid red";
+            }
+            return;
+        });
+        document.getElementById("product-quantity").addEventListener('change', function() {
+            var productQuantityInput = document.getElementById("product-quantity");
+            if (productQuantityInput.value > 0) {
+                productQuantityInput.style.border = "2px solid green";
+            } else {
+                productQuantityInput.style.border = "2px solid red";
+            }
+            return;
+        });
+        document.getElementById("product-description").addEventListener('change', function() {
+            var productDescriptionInput = document.getElementById("product-description");
+            if (productDescriptionInput.value.length > 3) {
+                productDescriptionInput.style.border = "2px solid green";
+            } else {
+                productDescriptionInput.style.border = "2px solid red";
+            }
+            return;
+        });
+    
+        document.querySelector("form").addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var productName=document.getElementById("product-name").value;
+            var productPrice=document.getElementById("product-price").value;
+            var productQuantity=document.getElementById("product-quantity").value;
+            var productDescription=document.getElementById("product-description").value;
+
+            if(productName=="" || productPrice=="" || productQuantity=="" || productDescription=="")
+            {
+                document.getElementById("error").innerHTML="All fields are required";
+                return;
+            }
+            if(productPrice<=0 || productQuantity<=0)
+            {
+                document.getElementById("error").innerHTML="Price and Quantity should be greater than 0";
+                return;
+            }
+            if(productName.length<3)
+            {
+                document.getElementById("error").innerHTML="Product Name should be atleast 3 characters";
+                return;
+            }
+            if(productDescription.length<3)
+            {
+                document.getElementById("error").innerHTML="Product Description should be atleast 3 characters";
+                return;
+            }
+            var table=document.querySelector("table");
+            table.innerHTML+=`<tr>
+            <td>${productName}</td>
+            <td>$${productPrice}</td>
+            <td>${productQuantity}</td>
+            <td>${productDescription}</td>
+            </tr>`;
+           
+
+            document.getElementById("success").innerHTML = "successfully added product";
+            
+            document.getElementById("product-name").value="";
+            document.getElementById("product-price").value="";
+            document.getElementById("product-quantity").value="";   
+            document.getElementById("product-description").value="";
+            document.getElementById("product-name").style.border = "1px solid #ccc";
+            document.getElementById("product-price").style.border = "1px solid #ccc";
+            document.getElementById("product-quantity").style.border = "1px solid #ccc";
+            document.getElementById("product-description").style.border = "1px solid #ccc";
+
+            setTimeout(function() {
+                document.getElementById("success").innerHTML = "";
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
