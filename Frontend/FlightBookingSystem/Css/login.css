@@ -1,13 +1,15 @@
 /* Full-height container */
 .container {
     height: 100vh;
+    margin-top: 6%;
 }
-
+.bg{
+    background: linear-gradient(45deg, #c000ff, #6ca3ad);
+}
 /* Card shadow and rounded edges */
 .card {
     width: 100%;
     max-width: 400px;
-    margin: auto;
 }
 
 /* Form group spacing */
@@ -23,8 +25,9 @@
 
 /* Button styling */
 .btn-primary {
+    color: #fff;
     background-color: #007bff;
-    border-color: #007bff;
+    border: 2px solid #ce86e1;
 }
 
 .btn-primary:hover {
