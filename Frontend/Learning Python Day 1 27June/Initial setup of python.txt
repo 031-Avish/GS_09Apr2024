@@ -1,0 +1,21 @@
+To set up Python on your system, follow these steps:
+
+1. Visit the official Python website at https://www.python.org/downloads/.
+
+2. Click on the "Downloads" tab.
+
+3. Choose the version of Python you want to install (e.g., Python 3.9.7).
+
+4. Select the appropriate installer for your operating system (Windows, macOS, or Linux).
+
+5. Download the installer and run it.
+
+6. Follow the installation wizard's instructions to complete the installation.
+
+7. During the installation, make sure to check the box that says "Add Python to PATH" (for Windows users) or "Install launcher for all users" (for macOS and Linux users).
+
+8. Once the installation is complete, open a new terminal or command prompt window.
+
+9. Type `python --version` to verify that Python is installed correctly. You should see the version number you installed.
+
+10. Congratulations! Python is now set up on your system.
