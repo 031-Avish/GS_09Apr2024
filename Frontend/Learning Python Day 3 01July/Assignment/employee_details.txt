@@ -1,0 +1,8 @@
+
+******************************
+Employee Details:
+Name:          avish
+Age:           23
+Date of Birth: 12-12-2000
+Phone:         2345678987
+Email:         avi@g.c
