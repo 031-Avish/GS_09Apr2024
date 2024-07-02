@@ -1,0 +1,132 @@
+1) merge the tool 
+def merge_the_tools(string, k):
+    var = []
+    for i in range(0, len(string), k):
+        segment = string[i:i+k]
+        unique_chars = ''.join(sorted(set(segment), key=segment.index))  
+        var.append(unique_chars)
+    for i in var:
+        print(i)
+
+if __name__ == '__main__':
+    string, k = input(), int(input())
+    merge_the_tools(string, k)
+
+2) collections-Counter
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+from collections import Counter
+
+x=int(input())
+li=input().split()
+count= dict(Counter(li).items())
+n=int(input())
+ans=0
+for i in range(0,n):
+    var=input().split()
+    size=var[0]
+    price=int(var[1])
+    if size in count.keys() and count[size] > 0:
+         ans+=price
+         count[size]-=1
+print(ans)
+    
+
+3) most commons 
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+def solve(s):
+    count=dict(Counter(s).items())
+    sort=sorted(count.items(), key=lambda x: (-x[1], x[0]))
+    for i in range(0,3):
+        a,b= sort[i]
+        print(a,b)
+if __name__ == '__main__':
+    s = input()
+    solve(s)
+
+4) py-if-else
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    n = int(input().strip())
+    if n%2 !=0:
+        print("Weird")
+    elif n in range(6,21):
+        print("Weird")
+    else:
+        print("Not Weird")
+    
+
+5) Arithmetic operators
+if __name__ == '__main__':
+    a = int(input())
+    b = int(input())
+    print(a+b)
+    print(a-b)
+    print(a*b)
+    
+
+6) py-divisions 
+if __name__ == '__main__':
+    a = int(input())
+    b = int(input())
+    print(a//b)
+    print(a/b)
+
+7) python loops
+if __name__ == '__main__':
+    n = int(input())
+    for i in range(n):
+        print(i*i)
+
+8) write a function leap year
+def is_leap(year):
+    if year%4==0 and year%100!=0:
+        return True
+    elif year%400==0:
+        return True
+    
+    return False
+
+year = int(input())
+print(is_leap(year))
+
+
+9)python print 
+
+if __name__ == '__main__':
+    n = int(input())
+    s=""
+    for i in range(1,n+1):
+        s=s+str(i)
+    print(s)
+
+
+10) list comprehension 
+
+if __name__ == '__main__':
+    x = int(input())
+    y = int(input())
+    z = int(input())
+    n = int(input())
+    ans = [[i,j,k] for i in range(0,x+1) for j in range(0,y+1) for k in range(0,z+1) if i+j+k != n ]
+    print(ans)
+    
+

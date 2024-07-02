@@ -1,0 +1,238 @@
+1) longest substring without repeating char
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        start=0
+        cmap={}
+        ans=0
+
+        for end in range(len(s)):
+            if s[end] in cmap:
+                start=max(start, cmap[s[end]] + 1)
+            cmap[s[end]]=end
+            ans=max(ans,end-start+1)
+        return ans
+
+
+########################################################
+
+2) Zig Zig
+
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows==1:
+            return s
+        arr=[""]*numRows
+        start=0
+        down=True
+        for c in s:
+            arr[start]+=c
+            if start==numRows-1:
+                down=False
+            if start==0:
+                down=True
+            if down:
+                start+=1
+            else : 
+                start-=1
+        return "".join(arr)
+
+#####################################################
+
+3) 3 sum closest 
+
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums=sorted(nums)
+        diff=float('inf')
+        for i in range(len(nums)-1):
+            start=i+1
+            end=len(nums)-1
+            while(start<end):
+                sum=nums[i]+nums[start]+nums[end]
+                if sum==target:
+                    return target
+                elif abs(target-sum)<diff:
+                    diff=abs(target-sum)
+                    ans=sum
+                if sum>target:
+                    end-=1
+                else:
+                    start+=1
+        return ans
+
+#####################################################
+
+4) generate parenthesis
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        ans=[]
+
+        def recursive_solution(n,open,close,s):
+            
+            if open==n and close==n:
+                ans.append(s)
+                return
+            if open < n :
+                recursive_solution(n,open+1,close,s+'(')
+            if close < n and open>close:
+                recursive_solution(n,open,close+1,s+')')
+        recursive_solution(n,0,0,"")
+        return ans
+    
+##############################################################
+
+5) Multiply string
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == '0' or num2 == '0':
+            return '0'
+        
+        def toInt(num):
+            ans = 0
+            for i in num:
+                ans = ans*10 +(ord(i) - ord('0'))
+            return ans
+
+        def toStr(s):
+            news = ''
+            while s:
+                a = s % 10
+                s = s // 10
+                news = chr(ord('0') + a) + news
+            return news
+        
+        return toStr(toInt(num1)*toInt(num2))
+        
+
+#######################################################
+
+6) group-anagram
+
+from collections import Counter
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        result=[]
+        mapper={}
+        for i in strs:
+            sort= "".join(sorted(i))
+            if sort not in mapper:
+                mapper[sort]=[i]
+            else:
+                mapper[sort].append(i)
+        
+        for values in mapper.values():
+            result.append(values)
+        return result
+
+
+########################################################
+
+7) Multiply string 
+
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == '0' or num2 == '0':
+            return '0'
+        
+        def toInt(num):
+            ans = 0
+            for i in num:
+                ans = ans*10 +(ord(i) - ord('0'))
+            return ans
+
+        def toStr(s):
+            news = ''
+            while s:
+                a = s % 10
+                s = s // 10
+                news = chr(ord('0') + a) + news
+            return news
+        
+        return toStr(toInt(num1)*toInt(num2))
+        
+#######################################################
+
+8) Jump game
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        ## keep track of maximum 
+
+        jump=0
+        for i in nums:
+            jump=max(jump,i)
+            jump-=1
+            if jump < 0:
+                return False
+            
+        return True
+
+#######################################################
+
+9) unique path 
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        if m==1 or n==1:
+            return 1
+        a =[1]*n
+        arr=[a]*m
+        for i in range(1,m):
+            for j in range(1,n):
+                arr[i][j]=arr[i-1][j] + arr[i][j-1]
+        
+
+        return arr[m-1][n-1]
+        
+#######################################################
+
+10) Justify content  
+class Solution:
+    def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
+        result = [] 
+        line = []    
+        line_length = 0  
+        for word in words:
+            # Check if adding the current word exceeds the maxWidth for the line
+            if line_length + len(line) + len(word) <= maxWidth:
+                line.append(word)  
+                line_length += len(word)
+            else:
+                result.append(line) 
+                line = [word]  
+                line_length = len(word) 
+        
+        result.append(line)
+        
+        justified_lines = []
+        
+        # Loop through each line except the last one
+        for i in range(len(result) - 1):
+            line = result[i]
+            num_words = len(line)
+            num_spaces = maxWidth - sum(len(word) for word in line)
+            
+            space_gaps = max(num_words - 1, 1)
+            
+            spaces_per_gap = num_spaces // space_gaps
+            extra_spaces = num_spaces % space_gaps
+
+            justified_line = ""
+            
+            # Iterate through each word in the line
+            for word in line:
+                justified_line += word
+                
+                # Check if there are more spaces to distribute
+                if space_gaps > 0:
+                    spaces_to_add = spaces_per_gap + (1 if extra_spaces > 0 else 0)
+                    justified_line += " " * spaces_to_add
+                    extra_spaces -= 1
+                    space_gaps -= 1
+
+            justified_lines.append(justified_line)
+
+        last_line = " ".join(result[-1])
+        last_line += " " * (maxWidth - len(last_line))
+        justified_lines.append(last_line)
+
+        return justified_lines
