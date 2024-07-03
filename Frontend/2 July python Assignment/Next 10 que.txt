@@ -1,0 +1,74 @@
+1)  Nested list
+if __name__ == '__main__':
+    map={}
+    for _ in range(int(input())):
+        name = input()
+        score = float(input())
+        if score in map.keys():
+            map[score].append(name)
+        else:
+            map[score]=[name]
+        
+    sort = sorted(map.items(), key=lambda x:x[0])
+    names=sorted(sort[1][1])
+    for i in names:
+        print(i)
+
+2)finding the percentage 
+
+if __name__ == '__main__':
+    n = int(input())
+    student_marks = {}
+    for _ in range(n):
+        name, *line = input().split()
+        scores = list(map(float, line))
+        student_marks[name] = scores
+    query_name = input()
+    addition=0
+    for marks in student_marks[query_name]:
+        addition +=marks
+    print("%.2f" % (addition/len(student_marks[query_name])))
+
+3) lists 
+if __name__ == '__main__':
+    N = int(input())
+    listdemo = []
+    for i in range(N):
+        inp=input().split()
+        if inp[0]=="insert":
+            listdemo.insert(int(inp[1]),int(inp[2]))
+        if inp[0]=="print":
+            print(listdemo)
+        if inp[0]=="remove":
+            listdemo.remove(int(inp[1]))
+        if inp[0]=="append":
+            listdemo.append(int(inp[1]))
+        if inp[0]=="sort":
+            listdemo.sort()
+        if inp[0]=="pop":
+            listdemo.pop()
+        if inp[0]=="reverse":
+            listdemo.reverse()
+    
+4) touple hash
+
+if __name__ == '__main__':
+    n = int(input())
+    integer_list = map(int, input().split())
+    print(hash(tuple(integer_list)))
+
+5) sWAP Cases
+
+def swap_case(s):
+    ans=""
+    for i in range(len(s)):
+        if s[i].islower():
+            ans+=s[i].upper()
+        else:
+            ans+=s[i].lower()
+    return ans
+
+if __name__ == '__main__':
+    s = input()
+    result = swap_case(s)
+    print(result)       
