@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeRequestTrackerApp.Migrations
 {
     [DbContext(typeof(RequestTrackerContext))]
-    [Migration("20240515071928_second")]
-    partial class second
+    [Migration("20240717072319_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,10 @@ namespace EmployeeRequestTrackerApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
@@ -58,7 +62,8 @@ namespace EmployeeRequestTrackerApp.Migrations
                             DateOfBirth = new DateTime(2000, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "",
                             Name = "Ramu",
-                            Phone = "9876543321"
+                            Phone = "9876543321",
+                            Role = "Admin"
                         },
                         new
                         {
@@ -66,7 +71,8 @@ namespace EmployeeRequestTrackerApp.Migrations
                             DateOfBirth = new DateTime(2002, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "",
                             Name = "Somu",
-                            Phone = "9988776655"
+                            Phone = "9988776655",
+                            Role = "User"
                         });
                 });
 

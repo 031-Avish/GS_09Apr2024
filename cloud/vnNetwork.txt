@@ -1,0 +1,46 @@
+vnNetwork
+vnNetwork-Firewall
+
+
+azureuseravi
+
+private Ip : 10.0.0.5
+rcNetworkavi
+
+
+Server=tcp:server-avi.database.windows.net,1433;Initial Catalog=db_avish;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication="Active Directory Default";
+
+Server=tcp:server-avi.database.windows.net,1433;Initial Catalog=db_avish;Persist Security Info=False;User ID=azureuseravi;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+
+Show database connection strings
+
+Server=tcp:msdocs-azuresql-server-avi-484640712.database.windows.net,1433;Initial Catalog=msdocsazuresqldbavi484640712;Persist Security Info=False;User ID=azureuseravi;Password=Test@12345;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+
+
+
+# Create a single database and configure a firewall rule
+# Variable block
+let "randomIdentifier=$RANDOM*$RANDOM"
+location="East US"
+resourceGroup="msdocs-azuresql-rg-avi-$randomIdentifier"
+tag="create-and-configure-database"
+server="msdocs-azuresql-server-avi-$randomIdentifier"
+database="msdocsazuresqldbavi$randomIdentifier"
+login="azureuseravi"
+password="Test@12345"
+# Specify appropriate IP address values for your environment
+# to limit access to the SQL Database server
+startIp=49.43.6.29
+endIp=49.43.6.29
+
+echo "Using resource group $resourceGroup with login: $login, password: $password..."
+echo "Creating $resourceGroup in $location..."
+az group create --name $resourceGroup --location "$location" --tags $tag
+echo "Creating $server in $location..."
+az sql server create --name $server --resource-group $resourceGroup --location "$location" --admin-user $login --admin-password $password
+echo "Configuring firewall..."
+az sql server firewall-rule create --resource-group $resourceGroup --server $server -n AllowYourIp --start-ip-address $startIp --end-ip-address $endIp
+echo "Creating $database on $server..."
+az sql db create --resource-group $resourceGroup --server $server --name $database --sample-name AdventureWorksLT --edition GeneralPurpose --family Gen5 --capacity 2 --zone-redundant true # zone redundancy is only supported on premium and business critical service tiers
